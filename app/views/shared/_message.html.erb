@@ -1,0 +1,14 @@
+<% flash.each do |k,v| %>
+<script type="text/javascript">
+	$(function(){
+		if (("<%= k %>"=='alert')){
+			$.notify("<%= v %>", "error");
+		}else if(("<%= k %>"=='notice')){
+			$.notify("<%= v %>", "success");
+		}else{
+			$.notify("<%= v %>", "<%= k %>");
+		}
+	});
+</script>
+<% end %>
+
