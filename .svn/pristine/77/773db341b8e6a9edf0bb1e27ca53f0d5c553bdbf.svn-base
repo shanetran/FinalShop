@@ -1,0 +1,14 @@
+class HomeController < ApplicationController
+  def index
+  end
+
+  def active
+    if User.verify_key(params[:key])
+      flash[:success] = "Account active complete."
+      redirect_to active_complete_path
+    else
+      flash[:error] = "Account cannot active."
+      redirect_to active_path
+    end
+  end
+end

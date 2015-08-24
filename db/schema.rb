@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150818104006) do
+ActiveRecord::Schema.define(version: 20150824041437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,12 @@ ActiveRecord::Schema.define(version: 20150818104006) do
 
   add_index "carts", ["product_id"], name: "index_carts_on_product_id", using: :btree
   add_index "carts", ["user_id"], name: "index_carts_on_user_id", using: :btree
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -42,7 +48,6 @@ ActiveRecord::Schema.define(version: 20150818104006) do
   create_table "products", force: true do |t|
     t.string   "name"
     t.text     "description"
-    t.boolean  "type"
     t.integer  "stock"
     t.float    "price"
     t.datetime "created_at"
@@ -84,6 +89,7 @@ ActiveRecord::Schema.define(version: 20150818104006) do
     t.string   "phone"
     t.string   "key"
     t.string   "status",                 default: "Pending"
+    t.boolean  "admin",                  default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

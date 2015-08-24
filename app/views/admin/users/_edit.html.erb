@@ -1,0 +1,63 @@
+<div class="modal fade" id="edit_user_<%= user.id %>" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<%= fa_icon("times-circle")%>
+				</button>
+				<h4 class="modal-title custom_align" id="Heading">Edit Account Detail</h4>
+			</div>
+			<%= form_for(:users, url: admin_user_path(user.id), method: :patch) do |f| %>
+			<div class="modal-body">
+				<div class="form-group col-lg-6">
+					<label for="">Email:</label>
+					<%= f.text_field :email, value: user.email, class: 'form-control', readonly: true %>
+				</div>
+				<div class="form-group col-lg-6">
+					<label for="">Full Name:</label>
+					<%= f.text_field :fullname, value: user.fullname, class: 'form-control' %>
+				</div>
+				<div class="form-group">
+					<label for="">Address:</label>
+					<%= f.text_area :address, value: user.address, class: 'form-control' %>
+				</div>
+				<div class="form-group col-lg-6">
+					<%= f.label "Day of Birth" %>
+					<div class="input-append date datepicker-edit-admin-user" id="datepicker-edit-admin" data-date="" data-date-format="dd-mm-yyyy">
+						<input class="form-control" value="<%= user.birthdate.strftime('%d-%m-%Y') %>" name="user[birthdate]" size="16" type="text" data-bind="" readonly="readonly" />
+						<span class="add-on" style="position: absolute;padding: 5px;top: 30px;right: 15px;"><%= fa_icon "calendar" %></span>
+					</div>
+					<style type="text/css">
+						.dropdown-menu {
+							z-index: 9999;
+						}
+					</style>
+					<script type="text/javascript">
+						$(".datepicker-edit-admin-user").datepicker().focus();
+					</script>
+				</div>
+				<div class="form-group col-lg-6">
+					<label for="">Gender:</label>
+					<%= f.select :gender, options_for_select([["Male",true],["Female",false]], selected: user.gender), {selected: user.gender}, {class: "form-control"} %>
+				</div>
+				<div class="form-group col-lg-6">
+					<label for="">Phone:</label>
+					<%= f.text_field :phone, value: user.phone, class: 'form-control' %>
+				</div>
+				<div class="form-group col-lg-6">
+					<label for="">Status:</label>
+					<%= f.select :status, options_for_select([["Active","Active"],["Pending","Pending"]], selected: user.status), {selected: user.status}, {class: "form-control"} %>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="modal-footer ">
+				<button type="submit" class="btn btn-warning btn-lg" style="width: 100%;">
+					<%= fa_icon("check-circle") %> Update
+				</button>
+			</div>
+			<% end %>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>

@@ -1,0 +1,10 @@
+<% if @products.size > 0 %>
+<p>
+ ok
+</p>
+<% else %>
+<p>
+	Data Not found
+</p>
+<% end %>
+

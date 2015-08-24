@@ -1,0 +1,5 @@
+<p>
+	<%= image_tag("active.png")%>
+	Your account active success. Thank for visiting.
+</p>
+<p><%= link_to "Visit Now", root_path, class: "btn btn-primary"%></p>
