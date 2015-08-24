@@ -24,7 +24,7 @@
 						<td><%= user.fullname %></td>
 						<td><%= user.email %></td>
 						<td><%= (user.gender == true) ? 'Male' : 'Female' %></td>
-						<td><%= DateTime.parse(user.birthdate).strftime("%F %T") %></td>
+						<td><%= user.birthdate %></td>
 						<td><%= user.address %></td>
 						<td><%= user.phone %></td>
 						<td><%= (user.admin == true) ? fa_icon("users") : fa_icon("user") %></td>
