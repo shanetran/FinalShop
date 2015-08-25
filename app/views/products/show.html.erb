@@ -77,12 +77,13 @@
 			</div>
 			<% else %>
 			<p>
-				You have login to write comment
+				You have login to write comment 
 			</p>
 			<% end %>
 		</div>
 	</div>
 </div>
+<%= @product.created_at.strftime('%F') %>
 <%= render 'shared/addWishlist' %>
 <script type="text/javascript">
 	$(".rating").rating({

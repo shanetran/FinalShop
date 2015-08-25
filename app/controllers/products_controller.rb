@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
-    @wishlist = WishList.where(user_id: current_user)
+    @wishlist = Wishlist.where(user_id: current_user)
   end
 end
