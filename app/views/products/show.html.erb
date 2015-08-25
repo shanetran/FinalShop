@@ -1,0 +1,78 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4">
+			<%= image_tag(@product.image.url, size: "300x300")%>
+		</div>
+		<div class="col-md-8">
+			<p style="font-size: 30px;">
+				<%= @product.name %>
+			</p>
+			<dl>
+				<%= @product.description %>
+			</dl>
+			<dl style="margin-bottom: 10px">
+				<% if @product.stock > 0 %>
+				<span class="label label-success" style="font-size: 1em">Available</span>
+				<% else %>
+				<span class="label label-danger" style="font-size: 1em">Unavailable</span>
+				<% end %>
+				<span style="color: #BF0000;font-size: 1.4em;vertical-align: middle;">$<%= @product.price %></span>
+				<span>
+					<input value="4" type="number" class="rating" readonly="true">
+				</span>
+				<script type="text/javascript">
+					$(".rating").rating({
+						size : "xs",
+						showClear : false,
+						showCaption : false
+					});
+				</script>
+				<style type="text/css">
+					.rating-xs {
+						font-size: 1em;
+					}
+				</style>
+			</dl>
+			<div class="form-group col-lg-3" style="padding: 0">
+				<input type="number" class="form-control" min="1" value="1" max="50" />
+			</div>
+			<div class="clearfix"></div>
+			<button type="button" class="btn btn-primary">
+				Add To Cart
+			</button>
+			<button type="button" class="btn btn-primary">
+				Add To Wishlist
+			</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h3> Comments </h3>
+			<blockquote>
+				<h6>Lorem ipsum dolor sit amet</h6>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+				</p>
+				<small>Someone famous <cite>Source Title</cite></small>
+			</blockquote>
+			<blockquote>
+				<h6>Lorem ipsum dolor sit amet</h6>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+				</p>
+				<small>Someone famous <cite>Source Title</cite></small>
+			</blockquote>
+			<div class="form-group col-lg-4">
+				<label for="">Title:</label>
+				<input type="text" class="form-control" />
+			</div>
+			<div class="form-group col-lg-10">
+				<label for="">Message:</label>
+				<%= text_area :message,{}, class: "form-control" %>
+			</div>
+			<div class="form-group col-lg-4">
+				<%= button_tag "Add Comment", class: "btn btn-primary" %>
+			</div>
+		</div>
+	</div>
+</div>
