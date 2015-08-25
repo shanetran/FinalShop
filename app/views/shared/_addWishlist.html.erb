@@ -1,0 +1,34 @@
+<div class="modal fade" id="AddProductWishList" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<%= fa_icon("times-circle")%>
+				</button>
+				<h4 class="modal-title custom_align" id="Heading">Add To WishList</h4>
+			</div>
+			<%= form_for(:wishlists, url: user_wishlist_add_product_path(current_user.id, @product.id)) do |f| %>
+			<div class="modal-body">
+				<div class="form-group col-lg-6">
+					<label for="">Group Name:</label>
+					<%= f.hidden_field :product_id, value: @product.id %>
+					<% if @wishlist.size > 0 %>
+					<%= f.select(:name, @wishlist.collect{|w| [ w.name, w.name ] },{}, {class: 'form-control'}) %>
+					<% else %>
+					<%= f.text_field :name, class: 'form-control' %>
+					<% end %>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="modal-footer ">
+				<button type="submit" class="btn btn-warning btn-lg" style="width: 100%;">
+					<%= fa_icon("plus-circle") %> Save
+				</button>
+			</div>
+			<% end %>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+

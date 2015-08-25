@@ -1,0 +1,48 @@
+<div class="row">
+	<% @products.each do |product| %>
+	<div class="col-sm-4 col-lg-4 col-md-4">
+		<div class="thumbnail">
+			<%= image_tag(product.image.url(:medium)) %>
+			<div class="caption">
+				<h5 class="pull-right"><%=number_to_currency product.price %></h5>
+				<h5><%= link_to product.name, "#" %></h5>
+				<p>
+					<%= truncate(product.description, :length => 100, :separator => ' ')%>
+				</p>
+			</div>
+			<div class="ratings">
+				<p class="pull-right">
+					15 reviews
+				</p>
+				<p>
+					<input value="4" type="number" class="rating" readonly="true">
+				</p>
+			</div>
+			<div style="padding: 9px;">
+				<p class="pull-right">
+					<%= link_to "Buy Now", "#", class: "btn btn-primary" %>
+				</p>
+				<p>
+					<%= link_to "View Detail", product_path(product), class: "btn btn-primary" %>
+				</p>
+			</div>
+		</div>
+	</div>
+	<% end %>
+	<script type="text/javascript">
+		$(".rating").rating({
+			size : "xs",
+			showClear : false,
+			showCaption : false
+		});
+	</script>
+	<style type="text/css">
+		.rating-xs {
+			font-size: 1em;
+		}
+	</style>
+	<div class="clearfix"></div>
+	<div style="text-align: center">
+		<%= paginate @products %>
+	</div>
+</div>
