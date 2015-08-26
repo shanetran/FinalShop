@@ -3,16 +3,12 @@
 		<div class="col-md-4">
 			<%= image_tag(@product.image.url, size: "300x300")%>
 			<div class="clearfix"></div>
-			<span class="pull-right"> 
-				<%= link_to "#" do %>
+			<span class="pull-right"> <%= link_to "#" do %>
 				<%= fa_icon("thumbs-o-up 2x")%>
-				<% end %> 
-			</span>
-			<span class=""> 
-				<%= link_to "#" do %>
+				<% end %> </span>
+			<span class=""> <%= link_to "#" do %>
 				<%= fa_icon("thumbs-o-down 2x")%>
-				<% end %> 
-			</span>
+				<% end %> </span>
 		</div>
 		<div class="col-md-8">
 			<p style="font-size: 30px;">
@@ -28,7 +24,7 @@
 				<span class="label label-danger" style="font-size: 1em">Unavailable</span>
 				<% end %>
 				<span style="color: #BF0000;font-size: 1.4em;vertical-align: middle;"><%= number_to_currency @product.price %></span>
-				<span>
+				<span style="display: table">
 					<input value="4" type="number" class="rating" readonly="true">
 				</span>
 			</dl>
@@ -39,64 +35,84 @@
 			<button type="button" class="btn btn-primary">
 				Add To Cart
 			</button>
-			
-					
+
 			<% if user_signed_in? %>
+			<div class="actions-wishlist" style="display: inline-block">
 				<% if @checkproductwishlist.empty? %>
-					<button type="button" data-toggle= "modal" data-target ="#AddProductWishList" class="btn btn-primary">
+				<div class="add-wishlist-complete" style="display: inline-block">
+					<button type="button" data-user="<%= current_user.id %>" data-product="<%= @product.id %>" class="add-wishlist btn btn-primary">
 						Add To Wishlist
 					</button>
+				</div>
 				<% else %>
-					<div class="rv-wishlist-complete" style="display: inline-block">
-						<button type="button" class="btn btn-primary rv-wishlist" data-user="<%= current_user.id %>" data-product="<%= @product.id %>">
-								Remove From Wishlist
-						</button>
-					</div>		
+				<div class="rv-wishlist-complete" style="display: inline-block">
+					<button type="button" class="btn btn-primary rv-wishlist" data-user="<%= current_user.id %>" data-product="<%= @product.id %>">
+						Remove From Wishlist
+					</button>
+				</div>
 				<% end %>
-				<%= render 'shared/addWishlist' %>
+			</div>
 			<% else %>
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#LoginModalForm">
-					You Need Login To Add Wishlist
-				</button>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#LoginModalForm">
+				You Need Login To Add Wishlist
+			</button>
 			<% end %>
-			
-			
+
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 			<h3> Comments </h3>
+			<% if @comments.size > 0 %>
+				<% @comments.each do |comment| %>
+				<blockquote>
+					<h6><%= fa_icon("angle-double-right")%> <%= comment.title %></h6>
+					<p>
+						<%= fa_icon("comments-o")%>
+						<%= comment.message %>
+					</p>
+					<input value="<%= comment.rate %>" type="number" class="rating" readonly="true">
+					<small> <%= fa_icon("user")%> <%= comment.user.fullname %> - <%= comment.created_at.strftime("%F")%> </small>
+				</blockquote>
+				<% end %>
+			<% else %>
 			<blockquote>
-				<h6>Lorem ipsum dolor sit amet</h6>
 				<p>
 					<%= fa_icon("comments-o")%>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+					No comment
 				</p>
-				<input value="4" type="number" class="rating" readonly="true">
-				<small> <%= fa_icon("user")%> Someone famous <cite>Source Title</cite> </small>
 			</blockquote>
-			<blockquote>
-				<h6>Lorem ipsum dolor sit amet</h6>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-				</p>
-				<small>Someone famous <cite>Source Title</cite> </small>
-			</blockquote>
+			<% end %>
+
 			<% if user_signed_in? %>
-			<div class="form-group col-lg-4">
-				<label for="">Title:</label>
-				<input type="text" class="form-control" />
+			<%= form_tag product_comments_path(@product.id) do %>
+			<%= hidden_field_tag :product_id, @product.id %>
+			<div style="padding-top: 10px; border-top: 1px solid">
+				<div class="form-group col-lg-10">
+					<label for="">Rating:</label>
+					<input id="rating-star" value="" type="number" class="rating" name="rate">
+					<script type="text/javascript">
+						$("#rating-star").on("rating.change", function(event, value, caption) {
+							$(this).attr("value", value);
+						});
+					</script>
+				</div>
+				<div class="form-group col-lg-4">
+					<label for="">Title:</label>
+					<%= text_field_tag :title, nil, class: "form-control" %>
+				</div>
+				<div class="form-group col-lg-10">
+					<label for="">Message:</label>
+					<%= text_area_tag :message, nil, class: "form-control" %>
+				</div>
+				<div class="form-group col-lg-4">
+					<%= submit_tag "Add Comment", class: "btn btn-primary" %>
+				</div>
 			</div>
-			<div class="form-group col-lg-10">
-				<label for="">Message:</label>
-				<%= text_area :message,{}, class: "form-control" %>
-			</div>
-			<div class="form-group col-lg-4">
-				<%= button_tag "Add Comment", class: "btn btn-primary" %>
-			</div>
+			<% end %>
 			<% else %>
 			<p>
-				You have login to write comment 
+				You have login to write comment
 			</p>
 			<% end %>
 		</div>

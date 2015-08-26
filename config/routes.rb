@@ -4,17 +4,17 @@ Rails.application.routes.draw do
 
   resources :users, only: [:edit, :update] do
     resources :likes
-    resources :wishlists do
-      post 'add_product', to: 'wishlists#add_product'
-    end
-    resources :comments
+    resources :wishlists
     resources :ratings
   end
-  resources :products
+  resources :products do
+    resources :comments
+  end
 
   # -------------------------------------
   # ajax route
   post 'remove_product', to: 'wishlists#remove_product'
+  post 'add_product', to: 'wishlists#add_product'
   # end
   #   -------------------------------------
 
