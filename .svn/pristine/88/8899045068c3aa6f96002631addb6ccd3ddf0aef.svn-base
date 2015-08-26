@@ -4,8 +4,8 @@ class WishlistsController < ApplicationController
   end
 
   def show
-    @wishlist = Wishlist.where(user_id: 24).map{|p| p.product_id}
-    @products = Product.where(id: @wishlist).page(params[:page])
+    @wishlist = Wishlist.where(user_id: current_user.id).first
+    @products = Product.where(id: [@wishlist.product_id]).page(params[:page])
   end
 
   def add_product
