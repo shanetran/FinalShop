@@ -14,7 +14,7 @@
 	<div class="form-group col-lg-6">
 		<%= f.label "Day of Birth" %>
 		<div class="input-append date" id="datepicker-user-new" data-date="" data-date-format="dd-mm-yyyy">
-			<input class="form-control" value="<%= current_user.birthdate.strftime('%d-%m-%Y') %>" name="users[birthdate]" size="16" type="text" data-bind="" readonly="readonly" />
+			<input class="form-control" value="<%= current_user.birthdate.strftime("%F") %>" name="users[birthdate]" size="16" type="text" data-bind="" readonly="readonly" />
 			<span class="add-on" style="position: absolute;padding: 5px;top: 30px;right: 15px;"><%= fa_icon "calendar" %></span>
 		</div>
 		<script type="text/javascript">
