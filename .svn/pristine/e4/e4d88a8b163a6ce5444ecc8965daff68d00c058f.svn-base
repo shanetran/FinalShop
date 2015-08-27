@@ -3,7 +3,6 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @wishlist = Wishlist.where(user_id: current_user)
     @comments = Comment.where(product_id: params[:id])
-    @rate = Comment.where(product_id: params[:id]).average(:rate).to_f
     if user_signed_in?
       @checkproductwishlist = Wishlist.CheckProductWishlist(current_user.id, params[:id])
     end

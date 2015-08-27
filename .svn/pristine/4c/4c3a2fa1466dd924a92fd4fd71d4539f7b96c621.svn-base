@@ -1,0 +1,9 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3> Your Wishlists </h3>
+		</div>
+		<%= render partial: "shared/products", locals: {products: @products} %>
+	</div>
+</div>
+

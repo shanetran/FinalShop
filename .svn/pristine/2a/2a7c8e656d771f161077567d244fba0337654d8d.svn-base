@@ -25,7 +25,7 @@
 				<% end %>
 				<span style="color: #BF0000;font-size: 1.4em;vertical-align: middle;"><%= number_to_currency @product.price %></span>
 				<span style="display: table">
-					<input value="<%= @rate %>" type="number" class="rating" readonly="true">
+					<input value="4" type="number" class="rating" readonly="true">
 				</span>
 			</dl>
 			<div class="form-group col-lg-3" style="padding: 0">
