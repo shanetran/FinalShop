@@ -61,13 +61,11 @@ $(function() {
 	$(".like-lk").click(function() {
 		var user = $(this).attr("data-user");
 		var product = $(this).attr("data-product");
-		var data_like = $(this).attr("data-like");
 		$.ajax({
 			url : "/like",
 			data : {
 				"user_id" : user,
-				"product_id" : product,
-				"data_like" : data_like
+				"product_id" : product
 			},
 			dataType : "Json",
 			type : "POST",
@@ -88,13 +86,11 @@ $(function() {
 	$(".unlike-lk").click(function() {
 		var user = $(this).attr("data-user");
 		var product = $(this).attr("data-product");
-		var data_like = $(this).attr("data-like");
 		$.ajax({
 			url : "/unlike",
 			data : {
 				"user_id" : user,
-				"product_id" : product,
-				"data_like" : data_like
+				"product_id" : product
 			},
 			dataType : "Json",
 			type : "POST",

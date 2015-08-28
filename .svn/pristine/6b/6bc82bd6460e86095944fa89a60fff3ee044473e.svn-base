@@ -1,0 +1,20 @@
+class LikesController < ApplicationController
+  include ApplicationHelper
+  def like
+    user = params[:user_id]
+    product= params[:product_id]
+    if user_liked(user, product).nil?
+      Rails.logger.debug "-----------ok-------------"
+    else
+      Rails.logger.debug "-----------no-------------"
+    end
+    
+  end
+
+  def unlike
+    user = params[:user_id]
+    product= params[:product_id]
+    data =  Like.create!(user_id: user, product_id: product, value: false)
+    render json: data
+  end
+end

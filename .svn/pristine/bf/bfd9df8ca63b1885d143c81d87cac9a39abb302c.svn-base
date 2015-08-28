@@ -3,64 +3,12 @@
 		<div class="col-md-4">
 			<%= image_tag(@product.image.url, size: "300x300")%>
 			<div class="clearfix"></div>
-			
-			<% if user_signed_in? %>
-				<% if user_liked(current_user.id, @product.id).nil? %>
-					<span class="pull-right"> 
-						<span class="label label-info label-like"><%= @like %></span>
-						<%= link_to "#", class: "like-lk", "data-user" => current_user.id, "data-product" => @product.id do %>
-						<%= fa_icon("thumbs-o-up 2x")%>
-						<% end %> 
-					</span>
-					<span class="">
-						<%= link_to "#", class: "unlike-lk", "data-user" => current_user.id, "data-product" => @product.id do %>
-							<%= fa_icon("thumbs-o-down 2x")%>
-						<% end %>
-						<span class="label label-info label-like"><%= @unlike %></span>
-					</span>				
-				<% else %>
-					<% if user_liked(current_user.id, @product.id).value == true %>
-						<span class="pull-right"> 
-							<span class="label label-info label-like"><%= @like %></span>
-							<%= link_to "#", style: "pointer-events: none" do %>
-							<%= fa_icon("thumbs-up 2x")%>
-							<% end %> 
-						</span>
-						<span class="">
-							<%= link_to "#", class: "unlike-lk", "data-user" => current_user.id, "data-product" => @product.id do %>
-								<%= fa_icon("thumbs-o-down 2x")%>
-							<% end %>
-							<span class="label label-info label-like"><%= @unlike %></span>
-						</span>
-					<% else %>
-						<span class="pull-right"> 
-							<span class="label label-info label-like"><%= @like %></span>
-							<%= link_to "#" , class: "like-lk", "data-user" => current_user.id, "data-product" => @product.id do %>
-							<%= fa_icon("thumbs-o-up 2x")%>
-							<% end %> 
-						</span>
-						<span class="">
-							<%= link_to "#", style: "pointer-events: none" do %>
-								<%= fa_icon("thumbs-down 2x")%>
-							<% end %>
-							<span class="label label-info label-like"><%= @unlike %></span>
-						</span>
-					<% end %>
-				<% end %>
-
-			<% else %>
-				<span class="pull-right"> <%= link_to "#", "data-toggle" => "modal", "data-target" => "#LoginModalForm" do %>
-					<%= fa_icon("thumbs-o-up 2x")%>
-					<% end %>
-					<span class="label label-info label-like"><%= @like %></span>
-				 </span>
-				<span class=""> <%= link_to "#", "data-toggle" => "modal", "data-target" => "#LoginModalForm" do %>
-					<%= fa_icon("thumbs-o-down 2x")%>
-					<% end %>
-					<span class="label label-info label-like"><%= @unlike %></span>
-				</span>
-			<% end %>
-				
+			<span class="pull-right"> <%= link_to "#" do %>
+				<%= fa_icon("thumbs-o-up 2x")%>
+				<% end %> </span>
+			<span class=""> <%= link_to "#" do %>
+				<%= fa_icon("thumbs-o-down 2x")%>
+				<% end %> </span>
 		</div>
 		<div class="col-md-8">
 			<p style="font-size: 30px;">
@@ -181,8 +129,5 @@
 <style type="text/css">
 	.rating-xs {
 		font-size: 1em;
-	}
-	.label-like{
-		vertical-align: text-top;
 	}
 </style>
