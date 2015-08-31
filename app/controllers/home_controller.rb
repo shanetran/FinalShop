@@ -13,4 +13,8 @@ class HomeController < ApplicationController
       redirect_to active_home_path
     end
   end
+
+  def search
+    @products = Product.search(params[:key]).page(params[:page])
+  end
 end

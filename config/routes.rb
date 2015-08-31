@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resources :comments
   end
   resources :categories
+  
+  get '/search', to: 'home#search'
   # -------------------------------------
   # ajax route
   post 'remove_product', to: 'wishlists#remove_product'

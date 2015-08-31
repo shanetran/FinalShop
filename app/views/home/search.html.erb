@@ -1,0 +1,15 @@
+<% if @products.size > 0 %>
+<div class="row">
+	<div class="col-md-9">
+		<h3>Search by key word: <%= params[:key] %></h3>		
+		<!-- Display list products -->
+			<%= render partial: "shared/products", locals:{products: @products} %>		
+		<!-- end  -->
+	</div>
+</div>
+<% else %>
+<p>
+	Search not found
+</p>
+<% end %>
+
