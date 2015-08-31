@@ -1,0 +1,41 @@
+<div class="row">
+	<div class="col-md-12">
+		<h4><%= fa_icon("comments")%> Manage Comments</h4>
+		<div class="table-responsive">
+			<table id="mytable" class="table table-bordred table-striped">
+				<thead>
+					<th>No</th>
+					<th>ProductName</th>
+					<th>Title</th>
+					<th>Message</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</thead>
+				<tbody>
+					<% @comments.each_with_index do |comment, index| %>
+					<tr>
+						<td><%= (index+1)%></td>
+						<td><%= comment.product.name %></td>
+						<td><%= comment.user.email %></td>
+						<td><%= comment.title %></td>
+						<td><%= truncate(comment.message, :length => 150, :separator => ' ') %></td>
+						<td>
+						<p data-placement="top" data-toggle="tooltip" title="Edit">
+							<%= link_to "#", remote: true, class: "btn btn-primary btn-xs", "data-title" => "Edit", "data-toggle" => "modal", "data-target" => "#edit_comment_#{comment.id}", :target => "_blank" do %>
+							<%= fa_icon("pencil")%>
+							<% end %>
+						</p></td>
+						<td>
+						<p data-placement="top" data-toggle="tooltip" title="Delete">
+							<%= link_to admin_comment_path(comment), data: {confirm: 'Are you sure?'}, method: :delete, class: "btn btn-danger btn-xs" do %>
+							<%= fa_icon("trash-o")%>
+							<% end %>
+						</p></td>
+					</tr>
+					<%= render partial: "edit", locals: {comment: comment} %>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

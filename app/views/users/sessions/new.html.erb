@@ -1,4 +1,4 @@
-<div style="margin: 0 auto; width: 50%;">
+<div style="margin: 0 auto; width: 40%;">
 	<h2>Login to Website</h2>
 	<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 	<div class="form-group">
@@ -19,8 +19,7 @@
 	<% end -%>
 
 	<div class="form-group">
-		<%= f.submit "Log in", class: "btn btn-primary" %>
-		<%= f.submit "Clear", type: 'reset', class: "btn btn-primary" %>
+		<%= f.button "Login", data:{disable_with: "<i class='fa fa-spinner fa-spin'></i> Login..."} ,class: "btn btn-primary", style: "width: 100%" %>
 	</div>
 	<% end %>
 

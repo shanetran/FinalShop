@@ -36,6 +36,7 @@ gem "spreadsheet", "0.9.0"
 gem 'kaminari'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

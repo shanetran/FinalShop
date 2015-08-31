@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: 'home#index'
-  devise_for :users, :controllers => {:registrations => "users/registrations"}
+  devise_for :users, :controllers => {:registrations => "users/registrations",
+                                      :sessions => "users/sessions"}
 
   resources :users, only: [:edit, :update] do
     resources :likes
@@ -10,7 +11,7 @@ Rails.application.routes.draw do
   resources :products do
     resources :comments
   end
-
+  resources :categories
   # -------------------------------------
   # ajax route
   post 'remove_product', to: 'wishlists#remove_product'
@@ -31,6 +32,8 @@ Rails.application.routes.draw do
     resources :users, :only => [:index, :create, :update, :destroy]
     resources :products
     resources :categories
+    resources :likes
+    resources :comments
   end
 
 end

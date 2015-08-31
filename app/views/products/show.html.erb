@@ -1,66 +1,43 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-4" style="text-align: center;">
 			<%= image_tag(@product.image.url, size: "300x300")%>
 			<div class="clearfix"></div>
-			
 			<% if user_signed_in? %>
-				<% if user_liked(current_user.id, @product.id).nil? %>
-					<span class="pull-right"> 
-						<span class="label label-info label-like"><%= @like %></span>
-						<%= link_to "#", class: "like-lk", "data-user" => current_user.id, "data-product" => @product.id do %>
-						<%= fa_icon("thumbs-o-up 2x")%>
-						<% end %> 
-					</span>
-					<span class="">
-						<%= link_to "#", class: "unlike-lk", "data-user" => current_user.id, "data-product" => @product.id do %>
-							<%= fa_icon("thumbs-o-down 2x")%>
-						<% end %>
-						<span class="label label-info label-like"><%= @unlike %></span>
-					</span>				
-				<% else %>
-					<% if user_liked(current_user.id, @product.id).value == true %>
-						<span class="pull-right"> 
-							<span class="label label-info label-like"><%= @like %></span>
-							<%= link_to "#", style: "pointer-events: none" do %>
-							<%= fa_icon("thumbs-up 2x")%>
-							<% end %> 
-						</span>
-						<span class="">
-							<%= link_to "#", class: "unlike-lk", "data-user" => current_user.id, "data-product" => @product.id do %>
-								<%= fa_icon("thumbs-o-down 2x")%>
-							<% end %>
-							<span class="label label-info label-like"><%= @unlike %></span>
-						</span>
-					<% else %>
-						<span class="pull-right"> 
-							<span class="label label-info label-like"><%= @like %></span>
-							<%= link_to "#" , class: "like-lk", "data-user" => current_user.id, "data-product" => @product.id do %>
-							<%= fa_icon("thumbs-o-up 2x")%>
-							<% end %> 
-						</span>
-						<span class="">
-							<%= link_to "#", style: "pointer-events: none" do %>
-								<%= fa_icon("thumbs-down 2x")%>
-							<% end %>
-							<span class="label label-info label-like"><%= @unlike %></span>
-						</span>
-					<% end %>
-				<% end %>
+			<% if user_liked(current_user.id, @product.id).nil? %>
+			<span class="pull-right"> <span class="label label-info label-like"><%= @like %></span> <%= link_to "#", class: "like-lk", "data-user" => current_user.id, "data-product" => @product.id do %>
+				<%= fa_icon("thumbs-o-up 2x")%>
+				<% end %> </span>
+			<span class="" style="float: left"> <%= link_to "#", class: "unlike-lk", "data-user" => current_user.id, "data-product" => @product.id do %>
+				<%= fa_icon("thumbs-o-down 2x")%>
+				<% end %> <span class="label label-info label-like"><%= @unlike %></span> </span>
+			<% else %>
+			<% if user_liked(current_user.id, @product.id).value == true %>
+			<span class="pull-right"> <span class="label label-info label-like"><%= @like %></span> <%= link_to "#", style: "pointer-events: none" do %>
+				<%= fa_icon("thumbs-up 2x")%>
+				<% end %> </span>
+			<span class="" style="float: left"> <%= link_to "#", class: "unlike-lk", "data-user" => current_user.id, "data-product" => @product.id do %>
+				<%= fa_icon("thumbs-o-down 2x")%>
+				<% end %> <span class="label label-info label-like"><%= @unlike %></span> </span>
+			<% else %>
+			<span class="pull-right"> <span class="label label-info label-like"><%= @like %></span> <%= link_to "#" , class: "like-lk", "data-user" => current_user.id, "data-product" => @product.id do %>
+				<%= fa_icon("thumbs-o-up 2x")%>
+				<% end %> </span>
+			<span class="" style="float: left"> <%= link_to "#", style: "pointer-events: none" do %>
+				<%= fa_icon("thumbs-down 2x")%>
+				<% end %> <span class="label label-info label-like"><%= @unlike %></span> </span>
+			<% end %>
+			<% end %>
 
 			<% else %>
-				<span class="pull-right"> <%= link_to "#", "data-toggle" => "modal", "data-target" => "#LoginModalForm" do %>
-					<%= fa_icon("thumbs-o-up 2x")%>
-					<% end %>
-					<span class="label label-info label-like"><%= @like %></span>
-				 </span>
-				<span class=""> <%= link_to "#", "data-toggle" => "modal", "data-target" => "#LoginModalForm" do %>
-					<%= fa_icon("thumbs-o-down 2x")%>
-					<% end %>
-					<span class="label label-info label-like"><%= @unlike %></span>
-				</span>
+			<span class="pull-right"> <%= link_to "#", "data-toggle" => "modal", "data-target" => "#LoginModalForm" do %>
+				<%= fa_icon("thumbs-o-up 2x")%>
+				<% end %> <span class="label label-info label-like"><%= @like %></span> </span>
+			<span class="" style="float: left"> <%= link_to "#", "data-toggle" => "modal", "data-target" => "#LoginModalForm" do %>
+				<%= fa_icon("thumbs-o-down 2x")%>
+				<% end %> <span class="label label-info label-like"><%= @unlike %></span> </span>
 			<% end %>
-				
+
 		</div>
 		<div class="col-md-8">
 			<p style="font-size: 30px;">
@@ -105,7 +82,7 @@
 				<% end %>
 			</div>
 			<% else %>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#LoginModalForm">
+			<button type="button" data-disable-with="<i class='fa fa-spinner fa-spin'></i> Processing..." class="btn btn-primary" data-toggle="modal" data-target="#LoginModalForm">
 				You Need Login To Add Wishlist
 			</button>
 			<% end %>
@@ -116,17 +93,17 @@
 		<div class="col-md-12">
 			<h3> Comments </h3>
 			<% if @comments.size > 0 %>
-				<% @comments.each do |comment| %>
-				<blockquote>
-					<h6><%= fa_icon("angle-double-right")%> <%= comment.title %></h6>
-					<p>
-						<%= fa_icon("comments-o")%>
-						<%= comment.message %>
-					</p>
-					<input value="<%= comment.rate %>" type="number" class="rating" readonly="true">
-					<small> <%= fa_icon("user")%> <%= comment.user.fullname %> - <%= comment.created_at.strftime("%F")%> </small>
-				</blockquote>
-				<% end %>
+			<% @comments.each do |comment| %>
+			<blockquote>
+				<h6><%= fa_icon("angle-double-right")%> <%= comment.title %></h6>
+				<p>
+					<%= fa_icon("comments-o")%>
+					<%= comment.message %>
+				</p>
+				<input value="<%= comment.rate %>" type="number" class="rating" readonly="true">
+				<small> <%= fa_icon("user")%> <%= comment.user.fullname %> - <%= comment.created_at.strftime("%F")%> </small>
+			</blockquote>
+			<% end %>
 			<% else %>
 			<blockquote>
 				<p>
@@ -158,7 +135,7 @@
 					<%= text_area_tag :message, nil, class: "form-control" %>
 				</div>
 				<div class="form-group col-lg-4">
-					<%= submit_tag "Add Comment", class: "btn btn-primary" %>
+					<%= button_tag "Add Comment", data:{disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..."}, class: "btn btn-primary" %>
 				</div>
 			</div>
 			<% end %>
@@ -182,7 +159,7 @@
 	.rating-xs {
 		font-size: 1em;
 	}
-	.label-like{
+	.label-like {
 		vertical-align: text-top;
 	}
 </style>

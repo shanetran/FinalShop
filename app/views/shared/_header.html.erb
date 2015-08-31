@@ -25,8 +25,24 @@
 				<li>
 					<a href="#">Manage Orders</a>
 				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= fa_icon "cog" %> Manage Others <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<%= link_to admin_likes_path do %>
+							<%= fa_icon("thumbs-up") %> Manage Like
+							<% end %>
+						</li>
+						<li>
+							<%= link_to admin_comments_path do %>
+							<%= fa_icon("comments") %> Manage Comment
+							<% end %>
+						</li>
+					</ul>
+				</li>
 			</ul>
 			<% end %>
+
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav" style="float: right">
@@ -82,4 +98,8 @@
 				</ul>
 			</div>
 		</div>
+	</div>
+	<%= link_to "" do %>
+		<%= fa_icon("shopping-cart 3x", style: "color: #337AB7;position: absolute;top: 5px;right: 20px;")%>
+	<% end %>
 </nav>

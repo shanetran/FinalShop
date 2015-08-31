@@ -24,8 +24,7 @@
 				</div>
 				<% end -%>
 				<div class="form-group">
-					<%= f.submit "Log in", class: "btn btn-primary" %>
-					<%= f.submit "Clear", type: 'reset', class: "btn btn-primary" %>
+					<%= f.button "Login", data:{disable_with: "<i class='fa fa-spinner fa-spin'></i> Login..."} ,class: "btn btn-primary", style: "width: 100%" %>
 				</div>
 				<% end %>
 			</div>

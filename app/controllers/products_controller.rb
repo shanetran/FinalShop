@@ -9,5 +9,6 @@ class ProductsController < ApplicationController
     if user_signed_in?
       @checkproductwishlist = Wishlist.CheckProductWishlist(current_user.id, params[:id])
     end
+    
   end
 end

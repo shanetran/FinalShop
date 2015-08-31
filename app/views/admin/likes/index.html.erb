@@ -1,0 +1,34 @@
+<div class="row">
+	<div class="col-md-12">
+		<h4><%= fa_icon("thumbs-up")%> Manage Like</h4>
+		<div class="table-responsive">
+			<table id="mytable" class="table table-bordred table-striped">
+				<thead>
+					<th>No</th>
+					<th>Product Name</th>
+					<th>Like</th>
+					<th>DisLike</th>
+					<th>Delete</th>
+				</thead>
+				<tbody>
+					<% @likes.each_with_index do |like, index| %>
+					<tr>
+						<td><%= (index + 1) %></td>
+						<td><%= like.product.name %></td>
+						<td><%= count_liked(like.product.id)%></td>
+						<td><%= count_disliked(like.product.id)%></td>
+						<td>
+						<p data-placement="top" data-toggle="tooltip" title="Delete">
+							<%= link_to admin_like_path(like.product.id), data: {confirm: 'Are you sure?'}, method: :delete, class: "btn btn-danger btn-xs" do %>
+							<%= fa_icon("trash-o")%>
+							<% end %>
+						</p></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</div>
+

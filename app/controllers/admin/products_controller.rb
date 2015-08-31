@@ -1,7 +1,7 @@
 module Admin
   class ProductsController < ApplicationController
     def index
-      @products = Product.all
+      @products = Product.order(:name).page(params[:page])
     end
 
     def new
@@ -11,6 +11,7 @@ module Admin
     def create
       product = Product.new(products_params)
       if product.save
+        Product.find(product.id).update(slug: product.name.parameterize)
         flash[:success]= "Add New product complete."
         redirect_to admin_products_path
       else
@@ -42,7 +43,7 @@ module Admin
     private
 
     def products_params
-      params.require(:products).permit(:name, :description, :type, :stock, :price, :image)
+      params.require(:products).permit(:name, :description, :type, :stock, :price, :image, :slug)
     end
 
   end

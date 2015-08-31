@@ -24,7 +24,7 @@
 				<div class="form-group col-lg-6">
 					<%= f.label "Day of Birth" %>
 					<div class="input-append date datepicker-edit-admin-user" id="datepicker-edit-admin" data-date="" data-date-format="dd-mm-yyyy">
-						<input class="form-control" value="<%= user.birthdate %>" name="user[birthdate]" size="16" type="text" data-bind="" readonly="readonly" />
+						<input class="form-control" value="<%= user.birthdate %>" name="users[birthdate]" size="16" type="text" data-bind="" readonly="readonly" />
 						<span class="add-on" style="position: absolute;padding: 5px;top: 30px;right: 15px;"><%= fa_icon "calendar" %></span>
 					</div>
 					<style type="text/css">
@@ -51,7 +51,7 @@
 				<div class="clearfix"></div>
 			</div>
 			<div class="modal-footer ">
-				<button type="submit" class="btn btn-warning btn-lg" style="width: 100%;">
+				<button type="submit" data-disable-with="<i class='fa fa-spinner fa-spin'></i> Processing..." class="btn btn-warning btn-lg" style="width: 100%;">
 					<%= fa_icon("check-circle") %> Update
 				</button>
 			</div>
