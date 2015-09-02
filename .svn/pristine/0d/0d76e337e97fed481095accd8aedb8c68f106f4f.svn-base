@@ -1,0 +1,40 @@
+class HomeController < ApplicationController
+  def index
+    @products = Product.order(:category_id).page(params[:page])
+    @categories = Category.all
+  end
+
+  def active
+    if User.verify_key(params[:key])
+      flash[:success] = "Account active complete."
+      redirect_to active_complete_home_path
+    else
+      flash[:error] = "Account cannot active."
+      redirect_to active_home_path
+    end
+  end
+
+  def search
+    products = Product.search(params[:key])
+    @products= products.page(params[:page])
+    if products
+      cate_id = products.map{|c| c.category_id}.uniq
+      @category = Category.where(id: [cate_id])
+      @min = products.map{|p| p.price}.min
+      @max = products.map{|p| p.price}.max
+    end
+  end
+
+  def fillter
+    Rails.logger.debug "------------#{params[:key]} ------------- \n"
+    Rails.logger.debug "------------#{params[:category]} ------------- \n"
+    Rails.logger.debug "------------#{params[:price]} ------------- \n"
+    Rails.logger.debug "------------#{params[:rating]} ------------- \n"
+    
+    #category = Category.where(id: [params[:category]])
+    price = Product.where(price: [params[:price]])
+    #@products = Product.search(params[:key]).where(price: [price])
+    Rails.logger.debug "------------#{price.count} ------------- \n"
+   
+  end
+end

@@ -1,0 +1,13 @@
+module Admin
+  class LikesController < ApplicationController
+    def index
+      @likes = Like.select(:product_id).distinct
+    end
+    
+    def destroy
+      Like.where(product_id: params[:id]).destroy_all
+      flash[:success] = "You Remove like complete."
+      redirect_to :back
+    end
+  end
+end

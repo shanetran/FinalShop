@@ -1,0 +1,39 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3> Your Order Detail </h3>
+			<% if @orders.size > 0 %>
+			<% @orders.each do |order| %>
+			<div class="row nav-cart-item">
+				<div class="col-md-2">
+					<%= image_tag(order.product.image.url(:large), size: "150x150") %>
+				</div>
+				<div class="col-md-7">
+					<h4 style="color: #337AB7"><%= link_to order.product.name, product_path(order) %></h4>
+					<p style="color: #A72828">
+						<%= number_to_currency order.product.price %>
+					</p>
+					<p>Quantity:  <span class="label label-info"><%= order.quantity %></span></p>
+					<p>Total Price:  <span class="label label-info"><%= order.total %></span></p>
+					<% if order.status == "Pendding" %>
+						<span class="label label-danger"><%= order.status %></span></p>
+					<% else %>
+						<span class="label label-success"><%= order.status %></span></p>
+					<% end %>
+				</div>
+			</div>
+			<% end %>
+			<div class="col-lg-3" style="float: right">
+				<%= link_to "Shopping Now", root_path, class: "btn btn-primary" %>
+			</div>
+			<% else %>
+			<p>
+				You not have order
+			</p>
+			<p>
+				<%= link_to "Shopping Now", root_path, class: "btn btn-primary" %>
+			</p>
+			<% end %>
+		</div>
+	</div>
+</div>

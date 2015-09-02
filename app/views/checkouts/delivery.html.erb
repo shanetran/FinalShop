@@ -1,0 +1,60 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3> Checkout Delivery </h3>
+			<% if @carts.length > 0 %>
+			<%= form_for(:orders, url: user_orders_path(current_user)) do |f| %>
+			<% total = 0 %>
+				<% @carts.each do |id, quantity| %>
+					<% if quantity.to_i > 0 %>
+					<%= f.fields_for id do |ff| %>
+						<% item = Product.find(id) %>
+						<div class="row nav-cart-item">
+							<div class="col-md-2"><%= image_tag(item.image.url(:large), size: "150x150") %></div>
+							<div class="col-md-7">
+								<h4 style="color: #337AB7"><%= link_to item.name, product_path(item) %></h4>
+								<%= ff.hidden_field :product_id, value: item.id %>
+								<%= ff.hidden_field :user_id, value: current_user.id %>
+								<%= ff.hidden_field :quantity, value: quantity %>
+								<%= ff.hidden_field :total, value: quantity * item.price %>
+								<p><%= truncate(item.description, :length => 100, :separator => ' ')%></p>
+								<p style="color: #A72828"><%=number_to_currency item.price %></p>
+								<p>Quantity: <span class="label label-primary"><%= quantity %></span></p>
+								<p>
+									<% if item.stock > 0%>
+										<span class="label label-success">In Stock</span>
+									<% else %>
+										<span class="label label-danger">Out of Stock</span>
+									<% end %>
+								</p>
+							</div>
+						</div>
+						<% total += item.price.to_i * quantity.to_i %>
+					<% end %>
+					<% end %>
+				<% end %>
+				<div class="row" style="text-align: right;">
+					<div style="float: right">
+						<p>Subtotal(<%= @carts.values.inject(:+) %> items): <%=number_to_currency total %></p>
+						<p>
+							<%= submit_tag "Continue", class: "btn btn-primary" %>
+						</p>
+					</div>
+					<div style="float: left;margin: 30px 0 0 0;">
+						<p>
+							<%= link_to "Continue Shopping", root_path, class: "btn btn-primary" %>
+						</p>
+					</div>
+				</div>
+				<% end %>
+			<% else %>
+			<p>
+				Cart is empty.
+			</p>
+			<p>
+				<%= link_to "Shopping Now", root_path, class: "btn btn-primary" %>
+			</p>
+			<% end %>
+		</div>
+	</div>
+</div>

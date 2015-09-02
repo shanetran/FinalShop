@@ -1,0 +1,29 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8">
+			<h3> Chekout Address </h3>
+			<%= form_for(:users, url: checkout_path(current_user), method: :patch) do |f| %>
+			<div class="form-group">
+				<label for="inputdefault">Full Name:</label>
+				<input class="form-control" value="<%= current_user.fullname %>" name="users[name]" type="text">
+			</div>delivery_checkout_path
+			<div class="form-group">
+				<label for="inputlg">Email:</label>
+				<input class="form-control" value="<%= current_user.email %>" name="users[email]" type="text">
+			</div>
+			<div class="form-group">
+				<label for="inputsm">Address:</label>
+				<textarea class="form-control" name="users[address]"><%= current_user.address %></textarea>
+			</div>
+			<div class="form-group">
+				<label for="inputsm">Phone:</label>
+				<input class="form-control" value="<%= current_user.phone %>" name="users[phone]" type="text" >
+			</div>
+			<div class="form-group">
+				<%= submit_tag "Continue", class: "btn btn-success" %>
+				<%= link_to "Continue Shopping", root_path, class: "btn btn-primary" %>
+			</div>
+			<% end %>
+		</div>
+	</div>
+</div>

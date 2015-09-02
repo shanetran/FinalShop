@@ -1,0 +1,28 @@
+<div class="modal fade" id="AdminNewCategory" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<%= fa_icon("times-circle")%>
+				</button>
+				<h4 class="modal-title custom_align" id="Heading">Add New Category</h4>
+			</div>
+			<%= form_for(:categories, url: admin_categories_path) do |f| %>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="">Name:</label>
+					<input type="text" name="categories[name]" class="form-control" />
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="modal-footer ">
+				<button type="submit" data-disable-with="<i class='fa fa-spinner fa-spin'></i> Processing..." class="btn btn-warning btn-lg" style="width: 100%;">
+					<%= fa_icon("plus-circle") %> Add New
+				</button>
+			</div>
+			<% end %>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>

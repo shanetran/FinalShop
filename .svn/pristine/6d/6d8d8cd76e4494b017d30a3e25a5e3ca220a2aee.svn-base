@@ -1,0 +1,77 @@
+<% if @products.size > 0 %>
+<div class="row">
+	<div class="col-md-3">
+		<h3>Filter</h3>
+		<%= form_tag fillter_path do %>
+		<%= hidden_field_tag :key, params[:key] %>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<p class="panel-title">
+					Category:
+				</p>
+				<% @category.each do |cate| %>
+				<p>
+					<input type="checkbox" name="category" value="<%= cate.id %>" />
+					<%= cate.name %>
+				</p>
+				<% end %>
+			</div>
+			<div class="panel-body">
+				<p class="panel-title">
+					Price:
+				</p>
+				<input class="fill-price" type="text" name="price" class="span2" value="" data-slider-min="<%= @min.to_i %>"
+				data-slider-max="<%= @max.to_i %>" data-slider-step="100" data-slider-value="[<%= @min.to_i %>,<%= @max.to_i %>]"/>
+			</div>
+			<div class="panel-footer">
+				<p class="panel-title">
+					Rating:
+				</p>
+				<input class="fill-rating" type="text" name="rating" data-slider-handle="custom" class="span2"
+				value="" data-slider-min="1"
+				data-slider-max="5" data-slider-step="1" data-slider-value="[1,5]"/>
+			</div>
+			<div class="form-group">
+				<%= submit_tag "Fillter", class: "btn btn-primary" %>
+			</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="col-md-9">
+		<h3>Search by key word: <%= params[:key] %></h3>
+		<!-- Display list products -->
+		<div class="display-products">
+			<%= render partial: "shared/products", locals:{products: @products} %>
+		</div>
+		<!-- end  -->
+	</div>
+</div>
+<% else %>
+<p>
+	Search not found
+</p>
+<% end %>
+<style>
+	.slider-handle.custom {
+		background: transparent none;
+		/* You can customize the handle and set a background image */
+	}
+
+	/* Or display content like unicode characters or fontawesome icons */
+	.slider-handle.custom::before {
+		line-height: 20px;
+		font-size: 20px;
+		content: '\2605'; /*unicode star character*/
+		color: #726204;
+	}
+</style>
+<script type="text/javascript">
+	$(function() {
+		$(".fill-rating").slider({});
+		$(".fill-price").slider({
+			ticks : [<%= @min.to_i %>,<%= @max.to_i %>],
+			ticks_labels : ['$<%= @min.to_i %>', '$<%= @max.to_i %>'],
+			ticks_snap_bounds : 30
+		});
+});
+</script>

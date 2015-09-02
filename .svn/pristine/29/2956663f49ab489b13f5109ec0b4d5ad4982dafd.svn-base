@@ -1,0 +1,23 @@
+module Admin
+  class CommentsController < ApplicationController
+    def index
+      @comments = Comment.all
+    end
+
+    def update
+      if Comment.find(params[:id]).update!(title: params[:comments][:title], message: params[:comments][:message])
+        flash[:success] = "Update comment complete."
+        redirect_to :back
+      else
+        flash[:error] = "Update comment fail !!!"
+        redirect_to :back
+      end
+    end
+
+    def destroy
+      Comment.find(params[:id]).destroy
+      flash[:success] = "Delete comment complete."
+      redirect_to :back
+    end
+  end
+end
