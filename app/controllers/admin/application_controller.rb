@@ -4,6 +4,7 @@ module Admin
     before_filter :authenticate_user!
     before_filter :authenticate_admin!
     helper_method :current_admin?
+    helper_method :cart_count
     private
     def authenticate_admin!
       if user_signed_in?
@@ -17,6 +18,14 @@ module Admin
     def current_admin?
       if user_signed_in?
         current_user.is_admin?
+      end
+    end
+
+    def cart_count
+      if session[:cart]
+        @carts = session[:cart]
+      else
+        @carts = {}
       end
     end
 
