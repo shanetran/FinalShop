@@ -8,9 +8,13 @@
 	<label for="">Price:</label>
 	<%= f.text_field :price, value: @product.price, class: 'form-control'%>
 </div>
-<div class="form-group col-lg-10">
+<div class="form-group col-lg-9">
 	<label for="">Description:</label>
 	<%= f.text_area :description, value: @product.description, class: 'form-control'%>
+</div>
+<div class="form-group col-lg-9">
+	<label for="">Slug:</label>
+	<%= f.text_field :slug, value: @product.slug, class: 'form-control'%>
 </div>
 <div class="form-group col-lg-5">
 	<label for="">Stock:</label>

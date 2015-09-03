@@ -1,50 +1,52 @@
 <div class="row">
-	<div class="col-md-3">
-		<h3>Filter</h3>
-		<%= form_tag search_path, method: :get do %>
-		<%= hidden_field_tag :key, params[:key] %>
-		<div class="list-group">
-			<div class="list-group-item">
-				<h4 class="list-group-item-heading">Category:</h4>
-				<p class="list-group-item-text">
-				<%= select_tag "category", options_from_collection_for_select(@category, :id, :name), :class =>"selectpicker show-tick", "data-style" => "btn-primary" %>
-				</p>
-			</div>
-			<div class="list-group-item">
-				<h4 class="list-group-item-heading">Price:</h4>
-				<p class="list-group-item-text">
-					<input class="fill-price" type="text" name="price" class="span2" value="" data-slider-min="<%= @min.to_i %>"
-					data-slider-max="<%= @max.to_i %>" data-slider-step="100" 
-					data-slider-value="[<%= params[:price] ? params[:price].partition(',').first.to_i : @min.to_i %>,<%= params[:price] ? params[:price].partition(',').last.to_i : @max.to_i %>]"/>
-				</p>
-			</div>
-			<div class="list-group-item">
-				<h4 class="list-group-item-heading">Rating:</h4>
-				<p class="list-group-item-text">
-					<input class="fill-rating" type="text" name="rating" data-slider-handle="custom" class="span2"
-				value="" data-slider-min="1"
-				data-slider-max="5" data-slider-step="1" data-slider-value="[1,5]"/>
-				</p>
-			</div>
-			<div class="list-group-item">
-				<%= button_tag "Filter", data:{disable_with: "<i class='fa fa-spinner fa-spin'></i> Searching..."}, class: "btn btn-primary" %>
-			</div>
-		</div>
-		<% end %>
-	</div>
-	<div class="col-md-9">
+	<div class="col-md-12">
 		<% if @products.size > 0 %>
-		<h3>Search by key word: <%= params[:key] %></h3>
-		<!-- Display list products -->
-		<div class="display-products">
-			<%= render partial: "shared/products", locals:{products: @products} %>
+		<div class="col-md-3">
+			<h3>Filter</h3>
+			<%= form_tag search_path, method: :get do %>
+			<%= hidden_field_tag :key, params[:key] %>
+			<div class="list-group">
+				<div class="list-group-item">
+					<h4 class="list-group-item-heading">Category:</h4>
+					<p class="list-group-item-text">
+						<%= select_tag "category", options_from_collection_for_select(@category, :id, :name), :class =>"selectpicker show-tick", "data-style" => "btn-primary" %>
+					</p>
+				</div>
+				<div class="list-group-item">
+					<h4 class="list-group-item-heading">Price:</h4>
+					<p class="list-group-item-text">
+						<input class="fill-price" type="text" name="price" class="span2" value="" data-slider-min="<%= @min.to_i %>"
+						data-slider-max="<%= @max.to_i %>" data-slider-step="100"
+						data-slider-value="[<%= params[:price] ? params[:price].partition(',').first.to_i : @min.to_i %>,<%= params[:price] ? params[:price].partition(',').last.to_i : @max.to_i %>]"/>
+					</p>
+				</div>
+				<div class="list-group-item">
+					<h4 class="list-group-item-heading">Rating:</h4>
+					<p class="list-group-item-text">
+						<input class="fill-rating" type="text" name="rating" data-slider-handle="custom" class="span2"
+						value="" data-slider-min="1"
+						data-slider-max="5" data-slider-step="1" data-slider-value="[1,5]"/>
+					</p>
+				</div>
+				<div class="list-group-item">
+					<%= button_tag "Filter", data:{disable_with: "<i class='fa fa-spinner fa-spin'></i> Searching..."}, class: "btn btn-primary" %>
+				</div>
+			</div>
+			<% end %>
 		</div>
-		<!-- end  -->
-		<% else %>
+		<div class="col-md-9">
+			<h3>Search by key word: <%= params[:key] %></h3>
+			<!-- Display list products -->
+			<div class="display-products">
+				<%= render partial: "shared/products", locals:{products: @products} %>
+			</div>
+			<!-- end  -->
+			<% else %>
 			<p>
 				Search not found
 			</p>
-		<% end %>		
+			<% end %>
+		</div>
 	</div>
 </div>
 </div>
@@ -73,3 +75,6 @@
 		});
 	});
 </script>
+
+				
+			
