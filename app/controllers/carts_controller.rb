@@ -5,14 +5,27 @@ class CartsController < ApplicationController
 
   def add
     id = params[:id]
+    quantity = params[:quantity].to_i
+
     session[:cart] ||= {}
     if session[:cart]
       cart = session[:cart]
     end
-    if cart[id]
-    cart[id] += 1
+
+    if id && (quantity > 1)
+      if cart[id]
+        cart.each do |key, value|
+          if key == id
+            cart[id] = (value.to_i + quantity)
+          end
+        end
+      else
+      cart[id] = quantity
+      end
+    elsif id && (quantity == 1)
+      cart[id] ? cart[id] += 1 : cart[id] =1
     else
-    cart[id] = 1
+      cart[id] ? cart[id] += 1 : cart[id] =1
     end
     redirect_to carts_path
   end

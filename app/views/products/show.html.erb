@@ -48,25 +48,28 @@
 			</dl>
 			<dl style="margin-bottom: 10px">
 				<% if @product.stock > 0 %>
-				<span class="label label-success" style="font-size: 1em">Available</span>
+				<span class="label label-success" style="font-size: 1em">In Stock</span>
 				<% else %>
-				<span class="label label-danger" style="font-size: 1em">Unavailable</span>
+				<span class="label label-danger" style="font-size: 1em">Out Of Stock</span>
 				<% end %>
 				<span style="color: #BF0000;font-size: 1.4em;vertical-align: middle;"><%= number_to_currency @product.price %></span>
 				<span style="display: table">
 					<input value="<%= @rate %>" type="number" class="rating" readonly="true">
 				</span>
 			</dl>
-			<div class="form-group col-lg-3" style="padding: 0">
-				<input type="number" class="form-control" min="1" value="1" max="50" />
-			</div>
-			<div class="clearfix"></div>
-			<% if @product.stock > 0 %>
-				<%= link_to "Add To Cart", add_cart_path(@product.id), class: "btn btn-primary" %>
-			<% else %>
-				<%= link_to "Add To Cart", add_cart_path(@product.id), class: "btn btn-primary disabled" %>
+			
+			<%= form_tag add_cart_path(@product), method: :get do %>
+				<div class="form-group col-lg-3" style="padding: 0">
+					<input type="number" name="quantity" class="form-control" min="1" value="1" max="50" />
+				</div>
+				<div class="clearfix"></div>
+				<% if @product.stock > 0 %>
+					<%= submit_tag "Add To Cart", class: "btn btn-primary" %>
+				<% else %>
+					<%= link_to "Add To Cart", "", class: "btn btn-primary disabled" %>
+				<% end %>
 			<% end %>
-
+			
 			<% if user_signed_in? %>
 			<div class="actions-wishlist" style="display: inline-block">
 				<% if @checkproductwishlist.empty? %>
