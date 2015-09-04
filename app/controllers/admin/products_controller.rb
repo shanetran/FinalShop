@@ -6,6 +6,7 @@ module Admin
 
     def new
       @products = Product.new
+      @category = Category.all
     end
 
     def create
@@ -22,6 +23,7 @@ module Admin
 
     def edit
       @product = Product.find(params[:id])
+      @category = Category.all
     end
 
     def update
@@ -43,7 +45,7 @@ module Admin
     private
 
     def products_params
-      params.require(:products).permit(:name, :description, :type, :stock, :price, :image, :slug)
+      params.require(:products).permit(:name, :description, :type, :stock, :price, :sale_price, :category_id, :image, :slug)
     end
 
   end

@@ -20,12 +20,19 @@ class HomeController < ApplicationController
     if products
       cate_id = products.map{|c| c.category_id}.uniq
       @category = Category.where(id: [cate_id])
-      @min = products.map{|p| p.price}.min
-      @max = products.map{|p| p.price}.max
+      min_max = []
+      products.each do |p|
+        p.sale_price ? min_max << p.sale_price : min_max << p.price
+      end
+      @min = min_max.min
+      @max = min_max.max
+      @r_min = products.map{|p| p.avg_rating}.min
+      @r_max = products.map{|p| p.avg_rating}.max
     end
     
     products = products.where(category_id: params[:category].to_i) if params[:category].present?
     products = products.where("price BETWEEN #{params[:price].partition(',').first.to_i} AND #{params[:price].partition(',').last.to_i}") if params[:price].present?
+    products = products.where("avg_rating BETWEEN #{params[:rating].partition(',').first.to_f} AND #{params[:rating].partition(',').last.to_f}") if params[:rating].present?
     @products = products.page(params[:page])
     
   end

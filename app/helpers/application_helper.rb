@@ -18,5 +18,9 @@ module ApplicationHelper
   def views(id)
     Impression.where(impressionable_id: id).count
   end
+  
+  def format_price(price)
+    number_with_precision(price, :precision => 0, :delimiter => ',')
+  end
 
 end

@@ -8,6 +8,10 @@
 	<label for="">Price:</label>
 	<%= f.text_field :price, value: @product.price, class: 'form-control'%>
 </div>
+<div class="form-group col-lg-5">
+	<label for=""> Sale Price:</label>
+	<%= f.text_field :sale_price, value: @product.sale_price, class: 'form-control'%>
+</div>
 <div class="form-group col-lg-9">
 	<label for="">Description:</label>
 	<%= f.text_area :description, value: @product.description, class: 'form-control'%>
@@ -19,6 +23,10 @@
 <div class="form-group col-lg-5">
 	<label for="">Stock:</label>
 	<%= f.number_field :stock, min: 1, value: @product.stock, class: 'form-control'%>
+</div>
+<div class="form-group col-lg-3">
+	<label for="">Stock:</label>
+		<%= f.select :category_id, options_from_collection_for_select(@category, :id, :name, selected: @product.category.id),{}, {class: "form-control"} %>
 </div>
 <div class="form-group col-lg-5">
 	<label class="control-label">Select File</label>

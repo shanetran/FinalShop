@@ -18,7 +18,7 @@
 								<%= ff.hidden_field :quantity, value: quantity %>
 								<%= ff.hidden_field :total, value: quantity * item.price %>
 								<p><%= truncate(item.description, :length => 100, :separator => ' ')%></p>
-								<p style="color: #A72828"><%=number_to_currency item.price %></p>
+								<p style="color: #A72828">$<%=format_price(item.price) %></p>
 								<p>Quantity: <span class="label label-primary"><%= quantity %></span></p>
 								<p>
 									<% if item.stock > 0%>
@@ -35,7 +35,7 @@
 				<% end %>
 				<div class="row" style="text-align: right;">
 					<div style="float: right">
-						<p>Subtotal(<%= @carts.values.inject(:+) %> items): <%=number_to_currency total %></p>
+						<p>Subtotal(<%= @carts.values.inject(:+) %> items): $<%=format_price(total) %></p>
 						<p>
 							<%= submit_tag "Continue", class: "btn btn-primary" %>
 						</p>

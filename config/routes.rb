@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     resources :categories
     resources :likes
     resources :comments
+    resources :orders
   end
 
 end

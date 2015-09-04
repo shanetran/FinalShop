@@ -6,28 +6,33 @@ class CartsController < ApplicationController
   def add
     id = params[:id]
     quantity = params[:quantity].to_i
-
-    session[:cart] ||= {}
-    if session[:cart]
-      cart = session[:cart]
-    end
-
-    if id && (quantity > 1)
-      if cart[id]
-        cart.each do |key, value|
-          if key == id
-            cart[id] = (value.to_i + quantity)
-          end
-        end
-      else
-      cart[id] = quantity
+    if Product.where(id: id, stock: 0).empty?
+      session[:cart] ||= {}
+      if session[:cart]
+        cart = session[:cart]
       end
-    elsif id && (quantity == 1)
+
+      if id && (quantity > 1)
+        if cart[id]
+          cart.each do |key, value|
+            if key == id
+            cart[id] = (value.to_i + quantity)
+            end
+          end
+        else
+        cart[id] = quantity
+        end
+      elsif id && (quantity == 1)
       cart[id] ? cart[id] += 1 : cart[id] =1
+      else
+      cart[id] ? cart[id] += 1 : cart[id] =1
+      end
+      redirect_to carts_path
     else
-      cart[id] ? cart[id] += 1 : cart[id] =1
+      flash[:error] = "Product not available !!!"
+      redirect_to :back
     end
-    redirect_to carts_path
+
   end
 
   def update

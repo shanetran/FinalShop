@@ -57,7 +57,7 @@ $(function() {
 	});
 	// end
 
-	//Like 
+	//Like
 	$(".like-lk").click(function() {
 		var user = $(this).attr("data-user");
 		var product = $(this).attr("data-product");
@@ -83,8 +83,8 @@ $(function() {
 		return false;
 	});
 	//end
-	
-	//Unlike 
+
+	//Unlike
 	$(".unlike-lk").click(function() {
 		var user = $(this).attr("data-user");
 		var product = $(this).attr("data-product");
@@ -108,6 +108,15 @@ $(function() {
 			}
 		});
 		return false;
+	});
+	//end
+
+	// expand - collapse Contact form
+	$(".lk-contact").click(function() {
+		$(".group-contact").toggle(function() {
+			console.log("toggle");
+			($(".icon-contact").children("i").hasClass("fa-plus")) ? $(".icon-contact").html("<i class='fa fa-minus'></i>") : $(".icon-contact").html("<i class='fa fa-plus'></i>");
+		});
 	});
 	//end
 

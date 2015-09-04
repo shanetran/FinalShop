@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150903033524) do
+ActiveRecord::Schema.define(version: 20150904092535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bills", force: true do |t|
+    t.string   "fullname"
+    t.string   "email"
+    t.text     "address"
+    t.string   "phone"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bills", ["user_id"], name: "index_bills_on_user_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -34,6 +46,14 @@ ActiveRecord::Schema.define(version: 20150903033524) do
 
   add_index "comments", ["product_id"], name: "index_comments_on_product_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "contacts", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "impressions", force: true do |t|
     t.string   "impressionable_type"
@@ -98,6 +118,7 @@ ActiveRecord::Schema.define(version: 20150903033524) do
     t.integer  "category_id"
     t.text     "slug"
     t.float    "avg_rating",         default: 0.0
+    t.float    "sale_price"
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree

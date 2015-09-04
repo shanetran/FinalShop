@@ -10,11 +10,21 @@
 				</div>
 				<div class="col-md-7">
 					<h4 style="color: #337AB7"><%= link_to order.product.name, product_path(order) %></h4>
-					<p style="color: #A72828">
-						<%= number_to_currency order.product.price %>
-					</p>
+					<% if order.product.sale_price %>
+						<p>
+							Price: 
+							<font style="text-decoration: line-through;opacity: .7">
+								$<%= format_price(order.product.price) %>
+							</font> 
+							<font style="color: #A72828">$<%= format_price(order.product.sale_price) %></font>
+						</p>
+					<% else %>
+						<p>
+							Price: <font style="color: #A72828">$<%= format_price(order.product.price) %></font>
+						</p>
+					<% end %>
 					<p>Quantity:  <span class="label label-info"><%= order.quantity %></span></p>
-					<p>Total Price:  <span class="label label-info"><%= order.total %></span></p>
+					<p>Total Price:  <span class="label label-info"><%=format_price(order.total) %></span></p>
 					<% if order.status == "Pendding" %>
 						<span class="label label-danger"><%= order.status %></span></p>
 					<% else %>

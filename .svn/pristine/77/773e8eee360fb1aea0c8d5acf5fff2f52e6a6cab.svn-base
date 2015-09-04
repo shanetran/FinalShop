@@ -1,0 +1,57 @@
+<div class="row">
+	<% products.each do |product| %>
+	<div class="col-sm-4 col-lg-4 col-md-4">
+		<div class="thumbnail">
+			<%= image_tag(product.image.url(:medium)) %>
+			<div class="caption">
+				<h5 class="pull-right"><%=number_to_currency product.price %></h5>
+				<h5><%= link_to product.name, product_path(product) %></h5>
+				<p>
+					<%= truncate(product.description, :length => 100, :separator => ' ')%>
+				</p>
+			</div>
+			<div class="ratings">
+				<p class="pull-right">
+					<%= views(product) %> Views
+					<% if product.stock > 0 %>
+						<span class="label label-success">In Stock</span>
+					<% else %>
+						<span class="label label-danger">Out Of Stock</span>
+					<% end %>
+				</p>
+				<p>
+					<input value="<%= show_rate_product(product) %>" type="number" class="rating" readonly="true">
+				</p>
+			</div>
+			<div style="padding: 9px;">
+				<p class="pull-right">
+					<% if product.stock > 0 %>
+						<%= link_to "Buy Now", add_cart_path(product.id), class: "btn btn-primary" %>
+					<% else %>
+						<%= link_to "Buy Now", add_cart_path(product.id), class: "btn btn-primary disabled" %>
+					<% end %>
+				</p>
+				<p>
+					<%= link_to "View Detail", product_path(product), class: "btn btn-primary" %>
+				</p>
+			</div>
+		</div>
+	</div>
+	<% end %>
+	<script type="text/javascript">
+		$(".rating").rating({
+			size : "xs",
+			showClear : false,
+			showCaption : false
+		});
+	</script>
+	<style type="text/css">
+		.rating-xs {
+			font-size: 1em;
+		}
+	</style>
+	<div class="clearfix"></div>
+	<div style="text-align: center">
+		<%= paginate products %>
+	</div>
+</div>

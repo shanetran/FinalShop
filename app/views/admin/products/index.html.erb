@@ -12,8 +12,10 @@
 				<thead>
 					<th>No</th>
 					<th>Name</th>
+					<th>Category</th>
 					<th>Description</th>
 					<th>Price</th>
+					<th>Sale</th>
 					<th>Stock</th>
 					<th>Created at</th>
 					<th>Image</th>
@@ -25,8 +27,16 @@
 					<tr>
 						<td><%= (index + 1) %></td>
 						<td><%= product.name %></td>
-						<td><%= truncate(product.description, :length => 150, :separator => ' ') %></td>
+						<td><%= product.category.name %></td>
+						<td><%= truncate(product.description, :length => 100, :separator => ' ') %></td>
 						<td><%= product.price %></td>
+						<td>
+							<% if product.sale_price %>
+								<label class="label label-success"><i class="fa fa-check-square-o"></i></label>
+							<% else %>
+								<label class="label label-info"><i class="fa fa-circle-o"></i></label>
+							<% end %>
+						</td>
 						<td><%= product.stock %></td>
 						<td><%= product.created_at %></td>
 						<td><%= image_tag product.image.url, size: "50x50" %></td>

@@ -8,9 +8,17 @@
 	<label for="">Price:</label>
 	<%= f.text_field :price, class: 'form-control'%>
 </div>
-<div class="form-group col-lg-10">
+<div class="form-group col-lg-5">
+	<label for="">Sale Price:</label>
+	<%= f.text_field :sale_price, class: 'form-control'%>
+</div>
+<div class="form-group col-lg-5">
 	<label for="">Description:</label>
 	<%= f.text_area :description, class: 'form-control'%>
+</div>
+<div class="form-group col-lg-5">
+	<label for="">Category:</label>
+	<%= f.select :category_id, options_for_select(@category.map{|m| [m.name, m.id] }),{}, {class: "form-control"} %>
 </div>
 <div class="form-group col-lg-5">
 	<label for="">Stock:</label>

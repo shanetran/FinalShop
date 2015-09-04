@@ -52,13 +52,28 @@
 				<% else %>
 				<span class="label label-danger" style="font-size: 1em">Out Of Stock</span>
 				<% end %>
-				<span style="color: #BF0000;font-size: 1.4em;vertical-align: middle;"><%= number_to_currency @product.price %></span>
+				
+				<% if @product.sale_price %>
+					<span style="opacity: .5;text-decoration: line-through;font-size: 1.4em;vertical-align: middle;">
+						$<%= format_price(@product.price) %>
+					</span>
+					<br />
+					<span style="color: #BF0000;font-size: 1.4em;vertical-align: middle;">
+						$<%= format_price(@product.sale_price) %>
+					</span>
+				<% else %>
+					<br />
+					<span style="color: #BF0000;font-size: 1.4em;vertical-align: middle;">
+						$<%= format_price(@product.price) %>
+					</span>
+				<% end %>
+				
 				<span style="display: table">
-					<input value="<%= @rate %>" type="number" class="rating" readonly="true">
+					<input value="<%= @product.avg_rating %>" type="number" class="rating" readonly="true">
 				</span>
 			</dl>
 			
-			<%= form_tag add_cart_path(@product), method: :get do %>
+			<%= form_tag add_cart_path(@product), method: :get, style: "display: inline" do %>
 				<div class="form-group col-lg-3" style="padding: 0">
 					<input type="number" name="quantity" class="form-control" min="1" value="1" max="50" />
 				</div>

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :carts
   has_many :comments
   has_many :wishlists
+  has_one :bill
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   def self.verify_key(key)

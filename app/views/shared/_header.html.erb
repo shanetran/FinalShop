@@ -17,16 +17,24 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= fa_icon "cog" %> Manage Home page <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li>
-							<%= link_to "Manage Users", admin_users_path %>
+							<%= link_to admin_users_path do %>
+								<%= fa_icon("user") %> Manage Users
+							<% end %>
 						</li>
 						<li>
-							<%= link_to "Manage Products", admin_products_path %>
+							<%= link_to admin_products_path do %>
+								<%= fa_icon("archive") %> Manage Products
+							<% end %>
 						</li>
 						<li>
-							<%= link_to "Manage Categories", admin_categories_path %>
+							<%= link_to admin_categories_path do %>
+								<%= fa_icon("book") %> Manage Categories
+							<% end %>
 						</li>
 						<li>
-							<a href="#">Manage Orders</a>
+							<%= link_to admin_orders_path do %>
+								<%= fa_icon("suitcase") %> Manage Orders
+							<% end %>
 						</li>
 					</ul>
 				</li>

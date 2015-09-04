@@ -24,8 +24,8 @@
 					<h4 class="list-group-item-heading">Rating:</h4>
 					<p class="list-group-item-text">
 						<input class="fill-rating" type="text" name="rating" data-slider-handle="custom" class="span2"
-						value="" data-slider-min="1"
-						data-slider-max="5" data-slider-step="1" data-slider-value="[1,5]"/>
+						value="" data-slider-min="0"
+						data-slider-max="5" data-slider-step="0.5" data-slider-value="[<%= params[:rating] ? params[:rating].partition(',').first.to_f : @r_min.to_f%>,<%= params[:rating] ? params[:rating].partition(',').last.to_f : @r_max.to_f %>]"/>
 					</p>
 				</div>
 				<div class="list-group-item">

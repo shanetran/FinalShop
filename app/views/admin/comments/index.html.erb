@@ -5,6 +5,7 @@
 			<table id="mytable" class="table table-bordred table-striped">
 				<thead>
 					<th>No</th>
+					<th>Customer Name</th>
 					<th>ProductName</th>
 					<th>Title</th>
 					<th>Message</th>
@@ -15,8 +16,8 @@
 					<% @comments.each_with_index do |comment, index| %>
 					<tr>
 						<td><%= (index+1)%></td>
-						<td><%= comment.product.name %></td>
 						<td><%= comment.user.email %></td>
+						<td><%= comment.product.name %></td>
 						<td><%= comment.title %></td>
 						<td><%= truncate(comment.message, :length => 150, :separator => ' ') %></td>
 						<td>
