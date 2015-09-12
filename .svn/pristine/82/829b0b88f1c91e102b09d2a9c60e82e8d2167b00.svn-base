@@ -13,7 +13,7 @@
 					<label for="">Rating:</label>
 					<input id="rating-star" value="<%= comment.rate%>" type="number" class="rating user-rate" name="rate">
 					<script type="text/javascript">
-						$(".user-rate").on("rating.change", function(event, value, caption) {
+						$("#user-rate").on("rating.change", function(event, value, caption) {
 							$(this).attr("value", value);
 						});
 					</script>

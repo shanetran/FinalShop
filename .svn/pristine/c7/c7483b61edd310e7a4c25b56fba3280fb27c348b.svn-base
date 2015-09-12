@@ -1,0 +1,208 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4" style="text-align: center;">
+			<%= image_tag(@product.image.url, size: "300x300")%>
+			<div class="clearfix"></div>
+			<% if user_signed_in? %>
+			<% if user_liked(current_user.id, @product.id).nil? %>
+			<span class="pull-right"> <span class="label label-info label-like"><%= @like %></span> <%= link_to "#", class: "like-lk", "data-user" => current_user.id, "data-product" => @product.id do %>
+				<%= fa_icon("thumbs-o-up 2x")%>
+				<% end %> </span>
+			<span class="" style="float: left"> <%= link_to "#", class: "unlike-lk", "data-user" => current_user.id, "data-product" => @product.id do %>
+				<%= fa_icon("thumbs-o-down 2x")%>
+				<% end %> <span class="label label-info label-like"><%= @unlike %></span> </span>
+			<% else %>
+			<% if user_liked(current_user.id, @product.id).value == true %>
+			<span class="pull-right"> <span class="label label-info label-like"><%= @like %></span> <%= link_to "#", style: "pointer-events: none" do %>
+				<%= fa_icon("thumbs-up 2x")%>
+				<% end %> </span>
+			<span class="" style="float: left"> <%= link_to "#", class: "unlike-lk", "data-user" => current_user.id, "data-product" => @product.id do %>
+				<%= fa_icon("thumbs-o-down 2x")%>
+				<% end %> <span class="label label-info label-like"><%= @unlike %></span> </span>
+			<% else %>
+			<span class="pull-right"> <span class="label label-info label-like"><%= @like %></span> <%= link_to "#" , class: "like-lk", "data-user" => current_user.id, "data-product" => @product.id do %>
+				<%= fa_icon("thumbs-o-up 2x")%>
+				<% end %> </span>
+			<span class="" style="float: left"> <%= link_to "#", style: "pointer-events: none" do %>
+				<%= fa_icon("thumbs-down 2x")%>
+				<% end %> <span class="label label-info label-like"><%= @unlike %></span> </span>
+			<% end %>
+			<% end %>
+
+			<% else %>
+			<span class="pull-right"> <%= link_to "#", "data-toggle" => "modal", "data-target" => "#LoginModalForm" do %>
+				<%= fa_icon("thumbs-o-up 2x")%>
+				<% end %> <span class="label label-info label-like"><%= @like %></span> </span>
+			<span class="" style="float: left"> <%= link_to "#", "data-toggle" => "modal", "data-target" => "#LoginModalForm" do %>
+				<%= fa_icon("thumbs-o-down 2x")%>
+				<% end %> <span class="label label-info label-like"><%= @unlike %></span> </span>
+			<% end %>
+
+		</div>
+		<div class="col-md-8">
+			<p style="font-size: 30px;">
+				<%= @product.name %>
+			</p>
+			<dl>
+				<%= @product.description %>
+			</dl>
+			<dl style="margin-bottom: 10px">
+				<% if @product.stock > 0 %>
+				<span class="label label-success" style="font-size: 1em">In Stock</span>
+				<% else %>
+				<span class="label label-danger" style="font-size: 1em">Out Of Stock</span>
+				<% end %>
+				
+				<% if @product.sale_price %>
+					<span style="opacity: .5;text-decoration: line-through;font-size: 1.4em;vertical-align: middle;">
+						$<%= format_price(@product.price) %>
+					</span>
+					<span style="position: relative;margin-left: 70px;">
+						<%= image_tag("sale-label.png", class: "label-sale")%>
+						<i class="label-percent" style="top: 0"><%= percent_price(@product.sale_price, @product.price)%></i>
+					</span>
+					<br />
+					<span style="color: #BF0000;font-size: 1.4em;vertical-align: middle;">
+						$<%= format_price(@product.sale_price) %>
+					</span>
+				<% else %>
+					<br />
+					<span style="color: #BF0000;font-size: 1.4em;vertical-align: middle;">
+						$<%= format_price(@product.price) %>
+					</span>
+				<% end %>
+				
+				<span style="display: table">
+					<input value="<%= @product.avg_rating %>" type="number" class="rating" readonly="true">
+				</span>
+			</dl>
+			
+			<%= form_tag add_cart_path(@product), method: :get, style: "display: inline" do %>
+				<div class="form-group col-lg-3" style="padding: 0">
+					<input type="number" name="quantity" class="form-control" min="1" value="1" max="50" />
+				</div>
+				<div class="clearfix"></div>
+				<% if @product.stock > 0 %>
+					<%= submit_tag "Add To Cart", class: "btn btn-primary" %>
+				<% else %>
+					<%= link_to "Add To Cart", "", class: "btn btn-primary disabled" %>
+				<% end %>
+			<% end %>
+			
+			<% if user_signed_in? %>
+			<div class="actions-wishlist" style="display: inline-block">
+				<% if @checkproductwishlist.empty? %>
+				<div class="add-wishlist-complete" style="display: inline-block">
+					<button type="button" data-user="<%= current_user.id %>" data-product="<%= @product.id %>" class="add-wishlist btn btn-primary">
+						Add To Wishlist
+					</button>
+				</div>
+				<% else %>
+				<div class="rv-wishlist-complete" style="display: inline-block">
+					<button type="button" class="btn btn-primary rv-wishlist" data-user="<%= current_user.id %>" data-product="<%= @product.id %>">
+						Remove From Wishlist
+					</button>
+				</div>
+				<% end %>
+			</div>
+			<% else %>
+			<button type="button" data-disable-with="<i class='fa fa-spinner fa-spin'></i> Processing..." class="btn btn-primary" data-toggle="modal" data-target="#LoginModalForm">
+				You Need Login To Add Wishlist
+			</button>
+			<% end %>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h3> Comments </h3>
+			<% if @comments.size > 0 %>
+			<% @comments.each do |comment| %>
+			<blockquote>
+			<% if current_user.id == comment.user_id%>
+				<%= render partial: "comment", locals: {comment: comment} %>
+				<h6><%= fa_icon("angle-double-right")%> <%= comment.title %></h6>
+				<p>
+					<%= fa_icon("comments-o")%>
+					<%= comment.message %>
+				</p>
+				<input value="<%= comment.rate %>" type="number" class="rating" readonly="true">
+				<small>
+					<%= fa_icon("user")%> <%= comment.user.fullname %> - <%= comment.created_at.strftime("%F")%>
+					<%= button_tag "", class: "btn btn-info btn-xs","data-toggle" => "modal", "data-target" => "#user_comment_#{comment.id}" do %>
+					<%= fa_icon("edit")%>
+					<% end %>
+					<%= link_to product_comment_path(comment.product.id, comment), data: {confirm: 'Are you sure?'}, method: :delete, class: "btn btn-danger btn-xs" do %>
+						<%= fa_icon("trash-o")%>
+					<% end %>
+				</small>
+			<% else %>
+				<h6><%= fa_icon("angle-double-right")%> <%= comment.title %></h6>
+				<p>
+					<%= fa_icon("comments-o")%>
+					<%= comment.message %>
+				</p>
+				<input value="<%= comment.rate %>" type="number" class="rating" readonly="true">
+				<small> <%= fa_icon("user")%> <%= comment.user.fullname %> - <%= comment.created_at.strftime("%F")%> </small>			
+			<% end %>
+			</blockquote>
+			<% end %>
+			<% else %>
+			<blockquote>
+				<p>
+					<%= fa_icon("comments-o")%>
+					No comment
+				</p>
+			</blockquote>
+			<% end %>
+
+			<% if user_signed_in? %>
+			<%= form_tag product_comments_path(@product.id) do %>
+			<%= hidden_field_tag :product_id, @product.id %>
+			<div style="padding-top: 10px; border-top: 1px solid">
+				<div class="form-group col-lg-10">
+					<label for="">Rating:</label>
+					<input id="rating-star" value="" type="number" class="rating" name="rate">
+					<script type="text/javascript">
+						$("#rating-star").on("rating.change", function(event, value, caption) {
+							$(this).attr("value", value);
+						});
+					</script>
+				</div>
+				<div class="form-group col-lg-4">
+					<label for="">Title:</label>
+					<%= text_field_tag :title, nil, class: "form-control" %>
+				</div>
+				<div class="form-group col-lg-10">
+					<label for="">Message:</label>
+					<%= text_area_tag :message, nil, class: "form-control" %>
+				</div>
+				<div class="form-group col-lg-4">
+					<%= button_tag "Add Comment", data:{disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..."}, class: "btn btn-primary" %>
+				</div>
+			</div>
+			<% end %>
+			<% else %>
+			<p>
+				You have login to write comment
+			</p>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(".rating").rating({
+		size : "xs",
+		showClear : false,
+		showCaption : false
+	}); 
+</script>
+<style type="text/css">
+	.rating-xs {
+		font-size: 1em;
+	}
+	.label-like {
+		vertical-align: text-top;
+	}
+</style>

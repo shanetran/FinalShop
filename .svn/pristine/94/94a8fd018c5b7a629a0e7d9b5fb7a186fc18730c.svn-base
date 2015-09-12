@@ -18,8 +18,6 @@ class CommentsController < ApplicationController
    def update
      if Comment.find(params[:id]).update!(title: params[:title], message: params[:message], rate: params[:rate],
                                           user_id: current_user.id, product_id: params[:product_id])
-        rating = Comment.where(product_id: params[:product_id]).average(:rate).to_f                                 
-        Product.find(params[:product_id]).update(avg_rating: rating)
         flash[:success] = "Update comment complete."
         redirect_to :back
      else
@@ -30,8 +28,6 @@ class CommentsController < ApplicationController
    
    def destroy
      Comment.find(params[:id]).destroy
-     rating = Comment.where(product_id: params[:product_id]).average(:rate).to_f                                 
-     Product.find(params[:product_id]).update(avg_rating: rating)
      flash[:success] = "Remove comment complete."
      redirect_to :back
    end
