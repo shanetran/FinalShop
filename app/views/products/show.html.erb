@@ -119,13 +119,32 @@
 			<% if @comments.size > 0 %>
 			<% @comments.each do |comment| %>
 			<blockquote>
+			<% if current_user.id == comment.user_id%>
+				<%= render partial: "comment", locals: {comment: comment} %>
 				<h6><%= fa_icon("angle-double-right")%> <%= comment.title %></h6>
 				<p>
 					<%= fa_icon("comments-o")%>
 					<%= comment.message %>
 				</p>
 				<input value="<%= comment.rate %>" type="number" class="rating" readonly="true">
-				<small> <%= fa_icon("user")%> <%= comment.user.fullname %> - <%= comment.created_at.strftime("%F")%> </small>
+				<small>
+					<%= fa_icon("user")%> <%= comment.user.fullname %> - <%= comment.created_at.strftime("%F")%>
+					<%= button_tag "", class: "btn btn-info btn-xs","data-toggle" => "modal", "data-target" => "#user_comment_#{comment.id}" do %>
+					<%= fa_icon("edit")%>
+					<% end %>
+					<%= link_to product_comment_path(comment.product.id, comment), data: {confirm: 'Are you sure?'}, method: :delete, class: "btn btn-danger btn-xs" do %>
+						<%= fa_icon("trash-o")%>
+					<% end %>
+				</small>
+			<% else %>
+				<h6><%= fa_icon("angle-double-right")%> <%= comment.title %></h6>
+				<p>
+					<%= fa_icon("comments-o")%>
+					<%= comment.message %>
+				</p>
+				<input value="<%= comment.rate %>" type="number" class="rating" readonly="true">
+				<small> <%= fa_icon("user")%> <%= comment.user.fullname %> - <%= comment.created_at.strftime("%F")%> </small>			
+			<% end %>
 			</blockquote>
 			<% end %>
 			<% else %>
