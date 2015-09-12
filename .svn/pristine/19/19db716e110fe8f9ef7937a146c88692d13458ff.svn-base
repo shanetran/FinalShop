@@ -1,0 +1,48 @@
+<div class="container-fluid">
+	<div class="row">
+		<%= form_tag checkout_path(current_user), method: :patch do %>
+		<div class="col-md-6">
+			<h3> Chekout Address </h3>
+			<div class="form-group">
+				<label for="inputdefault">Full Name:</label>
+				<input class="form-control" value="<%= current_user.fullname %>" name="users[fullname]" type="text">
+			</div>
+			<div class="form-group">
+				<label for="inputlg">Email:</label>
+				<input class="form-control" readonly="true" value="<%= current_user.email %>" name="users[email]" type="text">
+			</div>
+			<div class="form-group">
+				<label for="inputsm">Address:</label>
+				<textarea class="form-control" name="users[address]"><%= current_user.address %></textarea>
+			</div>
+			<div class="form-group">
+				<label for="inputsm">Phone:</label>
+				<input class="form-control" value="<%= current_user.phone %>" name="users[phone]" type="text" >
+			</div>
+		</div>
+		<div class="col-md-6">
+			<h3>Customer Address Recieve </h3>
+			<div class="form-group">
+				<label for="inputdefault">Full Name:</label>
+				<input class="form-control" value="<%= current_user.fullname %>" name="bills[fullname]" type="text">
+			</div>
+			<div class="form-group">
+				<label for="inputlg">Email:</label>
+				<input class="form-control" value="<%= current_user.email %>" name="bills[email]" type="text">
+			</div>
+			<div class="form-group">
+				<label for="inputsm">Address:</label>
+				<textarea class="form-control" name="bills[address]"><%= current_user.address %></textarea>
+			</div>
+			<div class="form-group">
+				<label for="inputsm">Phone:</label>
+				<input class="form-control" value="<%= current_user.phone %>" name="bills[phone]" type="text" >
+			</div>
+			<div class="form-group">
+				<%= submit_tag "Continue", class: "btn btn-success" %>
+				<%= link_to "Continue Shopping", root_path, class: "btn btn-primary" %>
+			</div>
+		</div>
+		<% end %>
+	</div>
+</div>
