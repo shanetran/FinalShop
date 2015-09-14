@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :comments
   has_many :wishlists
+  has_many :products
   has_one :bill
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

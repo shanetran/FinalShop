@@ -36,6 +36,11 @@
 		<br />
 		<%= f.text_field :phone, autofocus: true, value: current_user.phone, class: "form-control" %>
 	</div>
+	<div class="form-group col-lg-6">
+		<%= f.label :Role %>
+		<br />
+		<%= f.select :role, options_for_select([["Seller","seller"],["User","user"]], selected: current_user.role),{selected: current_user.role}, {class: "form-control"} %>
+	</div>
 	<div class="form-group col-lg-12">
 		<%= f.submit "Save", class: "btn btn-primary" %>
 

@@ -24,7 +24,7 @@
 			</div>
 			<div class="ratings">
 				<p class="pull-right">
-					<%= views(product) %> Views
+					<%= view_count(product).present? ? view_count(product).value : 0 %> Views
 					<% if product.stock > 0 %>
 						<span class="label label-success">In Stock</span>
 					<% else %>

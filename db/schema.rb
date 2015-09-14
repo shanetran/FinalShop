@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150905042953) do
+ActiveRecord::Schema.define(version: 20150914124733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,10 +119,12 @@ ActiveRecord::Schema.define(version: 20150905042953) do
     t.text     "slug"
     t.float    "avg_rating",         default: 0.0
     t.float    "sale_price"
+    t.integer  "user_id"
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
   add_index "products", ["slug"], name: "index_products_on_slug", unique: true, using: :btree
+  add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree
 
   create_table "ratings", force: true do |t|
     t.integer  "user_id"
@@ -157,10 +159,20 @@ ActiveRecord::Schema.define(version: 20150905042953) do
     t.string   "status",                 default: "Pending"
     t.boolean  "admin",                  default: false
     t.datetime "last_seen_at"
+    t.string   "role",                   default: "user"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "visitors", force: true do |t|
+    t.integer  "product_id"
+    t.integer  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "visitors", ["product_id"], name: "index_visitors_on_product_id", using: :btree
 
   create_table "wishlists", force: true do |t|
     t.integer  "user_id"

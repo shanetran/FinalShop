@@ -52,7 +52,8 @@
 				<% else %>
 				<span class="label label-danger" style="font-size: 1em">Out Of Stock</span>
 				<% end %>
-				
+				<br />
+				<span class="label label-info">Sold by:</span> <%= link_to @product.user.fullname, distributor_path(@product.user) %>
 				<% if @product.sale_price %>
 					<span style="opacity: .5;text-decoration: line-through;font-size: 1.4em;vertical-align: middle;">
 						$<%= format_price(@product.price) %>

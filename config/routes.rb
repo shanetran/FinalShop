@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :products do
     resources :comments
   end
+  resources :distributors, only: [:show]
   resources :contacts
   resources :categories
   resources :checkouts do
