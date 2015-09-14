@@ -1,0 +1,65 @@
+<div style="margin: 0 auto; width: 50%;">
+	<h2>Sign up</h2>
+	<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+	<%= devise_error_messages! %>
+	<div class="form-group col-lg-12">
+		<%= f.label :email %>
+		<br />
+		<%= f.email_field :email, autofocus: true, class: "form-control" %>
+	</div>
+	<div class="form-group col-lg-6">
+		<%= f.label :password %>
+		<% if @minimum_password_length %>
+		<em>(<%= @minimum_password_length %> characters minimum)</em>
+		<% end %>
+		<br />
+		<%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+	</div>
+	<div class="form-group col-lg-6">
+		<%= f.label :password_confirmation %>
+		<br />
+		<%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+	</div>
+	<div class="form-group col-lg-6">
+		<%= f.label "Full Name" %>
+		<br />
+		<%= f.text_field :fullname, autofocus: true, class: "form-control" %>
+	</div>
+	<div class="form-group col-lg-6">
+		<%= f.label "Day of Birth" %>
+		<div class="input-append date" id="datepicker-user-new" data-date="" data-date-format="dd-mm-yyyy">
+			<input class="form-control" name="user[birthdate]" size="16" type="text" data-bind="" readonly="readonly" />
+			<span class="add-on" style="position: absolute;padding: 5px;top: 30px;right: 15px;"><%= fa_icon "calendar" %></span>
+		</div>
+		<script type="text/javascript">
+			$("#datepicker-user-new").datepicker();
+		</script>
+	</div>
+	<div class="form-group col-lg-12">
+		<%= f.label :address %>
+		<br />
+		<%= f.text_area :address, autofocus: true, class: "form-control" %>
+	</div>
+	<div class="form-group col-lg-6">
+		<%= f.label :Gender %>
+		<br />
+		<%= f.select :gender, options_for_select([["Male",true],["Female",false]]),{}, {class: "form-control"} %>
+	</div>
+	<div class="form-group col-lg-6">
+		<%= f.label :phone %>
+		<br />
+		<%= f.text_field :phone, autofocus: true, class: "form-control" %>
+	</div>
+	<div class="form-group col-lg-6">
+		<%= f.label :Role %>
+		<br />
+		<%= f.select :role, options_for_select([["Seller","seller"],["User","User"]]),{}, {class: "form-control"} %>
+	</div>
+	<div class="form-group col-lg-12">
+		<%= f.submit "Sign up", class: "btn btn-primary" %>
+		<%= f.submit "Clear", type: 'reset', class: "btn btn-primary" %>
+		or
+		<%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
+	</div>
+	<% end %>
+</div>

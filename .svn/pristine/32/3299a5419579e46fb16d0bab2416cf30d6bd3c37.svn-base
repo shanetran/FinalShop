@@ -1,0 +1,3 @@
+$('.nav-load-more').hide();
+$('.nav-products').append("<%= escape_javascript(render partial: "lists", locals: {products: @products})%>");
+$('.load_more_link').replaceWith("<%= escape_javascript(link_to_next_page(@products, 'Load more products', :remote => true, class:'btn btn-primary load_more_link'))%>");

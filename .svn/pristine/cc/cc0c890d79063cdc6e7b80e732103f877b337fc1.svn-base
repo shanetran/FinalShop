@@ -1,0 +1,19 @@
+class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  has_many :likes
+  has_many :ratings
+  has_many :orders
+  has_many :comments
+  has_many :wishlists
+  has_many :products
+  has_one :bill
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+  def self.verify_key(key)
+    where(key: key).update_all(status: "Active")
+  end
+  def is_admin?
+    self.admin == true
+  end
+end
