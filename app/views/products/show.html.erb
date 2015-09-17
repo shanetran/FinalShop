@@ -120,6 +120,7 @@
 			<% if @comments.size > 0 %>
 			<% @comments.each do |comment| %>
 			<blockquote>
+			<% if user_signed_in? %>
 			<% if current_user.id == comment.user_id%>
 				<%= render partial: "comment", locals: {comment: comment} %>
 				<h6><%= fa_icon("angle-double-right")%> <%= comment.title %></h6>
@@ -147,6 +148,7 @@
 				<small> <%= fa_icon("user")%> <%= comment.user.fullname %> - <%= comment.created_at.strftime("%F")%> </small>			
 			<% end %>
 			</blockquote>
+			<% end %>
 			<% end %>
 			<% else %>
 			<blockquote>
