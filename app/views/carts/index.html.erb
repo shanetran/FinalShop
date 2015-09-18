@@ -66,8 +66,9 @@
 							<% else %>
 								<% total += item.price.to_i * quantity.to_i %>
 							<% end %>
-							
-						<% end %>
+							<% else %>
+								<% session[:cart].delete(id) %>
+							<% end %>
 						<% end %>
 					<% end %>
 					<div class="row" style="text-align: right;">
