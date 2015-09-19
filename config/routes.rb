@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     collection do
       get '/destroy', to: 'carts#destroy'
       post '/update', to: 'carts#update'
+      post '/add_cart_ajax', to: 'carts#add_cart_ajax'
     end
   end
 

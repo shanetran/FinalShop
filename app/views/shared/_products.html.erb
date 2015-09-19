@@ -1,6 +1,7 @@
 <div class="row">
 	<% products.each do |product| %>
-	<div class="col-sm-4 col-lg-4 col-md-4">
+	<div class="col-sm-4 col-lg-4 col-md-4" style="position: relative">
+		<div class="img-loadding"></div>
 		<div class="thumbnail">
 			<% if product.sale_price %>
 				<%= image_tag("sale-label.png", class: "label-sale")%>
@@ -38,9 +39,9 @@
 			<div style="padding: 9px;">
 				<p class="pull-right">
 					<% if product.stock > 0 %>
-						<%= link_to "Buy Now", add_cart_path(product.id), class: "btn btn-primary" %>
+						<%= link_to "Buy Now", "#", class: "btn btn-primary add-ajax-cart", "data-id" => product.id %>
 					<% else %>
-						<%= link_to "Buy Now", add_cart_path(product.id), class: "btn btn-primary disabled" %>
+						<%= link_to "Buy Now", "", class: "btn btn-primary disabled" %>
 					<% end %>
 				</p>
 				<p>

@@ -3,7 +3,6 @@
 		<div class="col-md-12">
 			<h3> Shopping Cart </h3>
 			<% if @carts.length > 0 %>
-			<% hash = []%>
 				<%= form_tag update_carts_path, method: :post do %>
 					<% total = 0 %>
 					<% @carts.each do |id, quantity| %>

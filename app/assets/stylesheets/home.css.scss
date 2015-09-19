@@ -46,3 +46,13 @@
 .p-cart{
   margin-bottom: 0;
 }
+.img-loadding{
+  display: none;
+  background-image: image_url("loading.gif");
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 130px;
+  width: 32px;
+  left: 130px;
+  height: 32px;
+}

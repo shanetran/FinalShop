@@ -17,8 +17,8 @@ class Product < ActiveRecord::Base
     where(product_arel[:slug].matches_any(str))
   end
 
-  def to_param
-    "#{id} #{name}".parameterize
-  end
+  # def to_param
+    # "#{id} #{name}".parameterize
+  # end
 
 end

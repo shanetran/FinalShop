@@ -120,5 +120,37 @@ $(function() {
 	});
 	//end
 
+	//add ajax cart
+	$(".add-ajax-cart").click(function() {
+		var id = $(this).attr("data-id");
+		$.ajax({
+			url : "/carts/add_cart_ajax",
+			data : {
+				"id" : id
+			},
+			type : "post",
+			dataType : "JSON",
+			success : function(data) {
+				var count = 0;
+				console.log("success");
+				console.log(data);
+				$.each(data, function(index, item) {
+					count += parseInt(item);
+				});
+				if (count > 99) {
+					$(".cart-total").html("<label class='cart-amount-larger'>99+</label>");
+				} else if (count > 9) {
+					$(".cart-total").html("<label class='cart-amount-medium'>" + count + "</label>");
+				} else {
+					$(".cart-total").html("<label class='cart-amount'>" + count + "</label>");
+				}
+			},
+			error : function() {
+				console.log("error");
+			}
+		});
+		return false;
+	});
+	//
 
 });
