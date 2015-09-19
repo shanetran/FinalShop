@@ -1,0 +1,99 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3> Shopping Cart </h3>
+			<% if @carts.length > 0 %>
+				<%= form_tag update_carts_path, method: :post do %>
+					<% total = 0 %>
+					<% @carts.each do |id, quantity| %>
+						<% if quantity.to_i > 0 %>
+						<% item = Product.find_by_id(id) %>
+						<% if item %>
+							<div class="row nav-cart-item">
+								<div class="col-md-2"><%= image_tag(item.image.url(:large), size: "150x150") %></div>
+								<div class="col-md-7">
+									<h4 style="color: #337AB7"><%= link_to item.name, product_path(item) %></h4>
+									<p><%= truncate(item.description, :length => 100, :separator => ' ')%></p>
+									<% if item.sale_price %>
+										<p>
+											Price: 
+											<span style="text-decoration: line-through;opacity: .6">
+												$<%=format_price(item.price) %>
+											</span>
+											<span style="color: #A72828">
+												$<%=format_price(item.sale_price) %>
+											</span>
+											<span style="position: relative;margin-left: 70px;">
+												<%= image_tag("sale-label.png", class: "label-sale")%>
+												<i class="label-percent"><%= percent_price(item.sale_price, item.price)%></i>
+											</span>
+										</p>
+										<p>
+										Total: 
+											<label class="label label-success">
+												$<%= format_price(item.sale_price.to_i * quantity.to_i) %>
+											</label>
+										</p>
+									<% else %>
+										<p>
+											Price: 
+											<font style="color: #A72828"">
+												$<%=format_price(item.price) %>
+											</font>
+										</p>
+										<p>
+											Total: 
+											<label class="label label-success">
+												$<%= format_price(item.price.to_i * quantity.to_i) %>
+											</label>
+										</p>
+									<% end %>
+									<p>
+										<%= link_to remove_item_cart_path(id), class: "btn btn-danger btn-xs" do %>
+											<%= fa_icon("trash-o")%> Delete
+										<% end %>
+									</p>
+								</div>
+								<div class="col-md-3">
+									<div class="" style="width: 150px;margin: 4em 0px;">
+										<input id="quantity" name="quantity[<%= id %>]" value="<%= quantity %>" min="1" max="100" type="number" class="form-control"/>
+									</div>
+								</div>
+							</div>
+							<% if item.sale_price %>
+								<% total += item.sale_price.to_i * quantity.to_i %>
+							<% else %>
+								<% total += item.price.to_i * quantity.to_i %>
+							<% end %>
+							<% else %>
+								<% session[:cart].delete(id) %>
+							<% end %>
+						<% end %>
+					<% end %>
+					<div class="row" style="text-align: right;">
+						<div style="float: right">
+							<p>Subtotal(<%= @carts.values.inject(:+) %> items): $<%=format_price(total) %></p>
+							<p>
+								<%= submit_tag "Update Cart", class: "btn btn-primary" %>
+								<%= link_to "Checkout", checkouts_path, class: "btn btn-primary" %>
+							</p>
+						</div>
+						<div style="float: left;margin: 30px 0 0 0;">
+							<p>
+								<%= link_to "Continue Shopping", root_path, class: "btn btn-primary" %>
+								<%= link_to "Clear Cart", destroy_carts_path, class: "btn btn-primary" %>
+							</p>
+						</div>
+					</div>
+				<% end %>
+			<% else %>
+			<p>
+				Cart is empty.
+			</p>
+			<p>
+				<%= link_to "Shopping Now", root_path, class: "btn btn-primary" %>
+			</p>
+			<% end %>
+		</div>
+	</div>
+</div>
