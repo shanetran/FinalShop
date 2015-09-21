@@ -131,8 +131,7 @@ $(function() {
 			type : "post",
 			dataType : "JSON",
 			beforeSend : function() {
-				var a = $(this).closest(".product-items").find(".img-loadding");
-				a.html("<h1>hello</h1>");
+				$(".img-loadding").show();
 			},
 			success : function(data) {
 				var count = 0;
@@ -150,7 +149,7 @@ $(function() {
 			error : function() {
 			},
 			complete : function() {
-				//$(this).closest(".product-items").find(".img-loadding").hide();
+				$(".img-loadding").hide();
 			}
 		});
 		return false;

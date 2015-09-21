@@ -1,7 +1,7 @@
 <div class="row">
+	<div class="img-loadding"></div>
 	<% products.each do |product| %>
 	<div class="col-sm-4 col-lg-4 col-md-4 product-items" style="position: relative">
-		<div class="img-loadding"></div>
 		<div class="thumbnail">
 			<% if product.sale_price %>
 				<%= image_tag("sale-label.png", class: "label-sale")%>

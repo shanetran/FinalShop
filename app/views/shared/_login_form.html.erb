@@ -24,6 +24,11 @@
 				</div>
 				<% end -%>
 				<div class="form-group">
+					<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+					<br/>
+					<%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %>
+				</div>
+				<div class="form-group">
 					<%= f.button "Login", data:{disable_with: "<i class='fa fa-spinner fa-spin'></i> Login..."} ,class: "btn btn-primary", style: "width: 100%" %>
 				</div>
 				<% end %>

@@ -50,9 +50,10 @@
   display: none;
   background-image: image_url("loading.gif");
   background-repeat: no-repeat;
-  position: absolute;
-  top: 130px;
+  position: fixed;
+  top: 50%;
   width: 32px;
-  left: 130px;
+  left: 50%;
+  z-index: 9999;
   height: 32px;
 }
