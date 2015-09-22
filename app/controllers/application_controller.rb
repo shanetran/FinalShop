@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  has_mobile_fu false
+  before_action :prepare_for_mobile
   protect_from_forgery with: :exception
   before_filter :active_account_after_sign_up_complete, :only => [:index, :show, :edit, :create, :active_complete]
   helper_method :resource, :resource_name, :devise_mapping
@@ -25,6 +27,16 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def mobile_device?
+    is_mobile_device? or is_tablet_device?
+  #true
+  end
+  helper_method :mobile_device?
+
+  def prepare_for_mobile
+    request.format = :mobile if mobile_device?
+  end
 
   def cart_count
     if session[:cart]

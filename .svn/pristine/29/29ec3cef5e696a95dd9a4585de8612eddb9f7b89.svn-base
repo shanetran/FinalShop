@@ -17,6 +17,6 @@ Devise.setup do |config|
                               scope: 'email', info_fields: 'email, name'
   config.omniauth :google_oauth2, "48166077951-vf88iv9olf2s92eqv0tfm1mk74l2ob94.apps.googleusercontent.com", "QGS526I2ZK6XEZIaFHmzqlp2",
                                {
-                                 :scope => "email, profile, plus.me, http://gdata.youtube.com"                                                                                                                                                                                                                                                                                    
+                                 :scope => 'userinfo.email'                                                                                                                                                                                                                                                                                         
                                 }
 end
