@@ -1,4 +1,8 @@
 class ProductsController < ApplicationController
+  def index
+    @products = Product.order(:category_id).page(params[:page])
+  end
+
   def show
     @title_page = Product.find(params[:id]).name
     @product = Product.find(params[:id])

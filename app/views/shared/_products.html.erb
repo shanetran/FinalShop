@@ -65,6 +65,9 @@
 	</style>
 	<div class="clearfix"></div>
 	<div style="text-align: center">
-		<%= paginate products %>
+		<div class="paginator">
+			<%= paginate products, remote: true %>
+		</div>
 	</div>
 </div>
+

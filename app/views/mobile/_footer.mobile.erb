@@ -1,0 +1,22 @@
+<div data-role="footer" data-position="fixed">
+	<div data-role="navbar">
+		<ul>
+			<li>
+				<%= link_to products_path, "data-icon" => "grid" do %>
+				Products List
+				<% end %>
+			</li>
+			<li>
+				<% if user_signed_in? %>
+					<%= link_to destroy_user_session_path, :method => 'delete', "data-ajax" => "false", "data-icon" => "lock" do %>
+						Logout
+					<% end %>
+				<% else %>
+					<%= link_to new_user_registration_path, "data-icon" => "user" do %>
+						Sign Up
+					<% end %>
+				<% end %>
+			</li>
+		</ul>
+	</div>
+</div>

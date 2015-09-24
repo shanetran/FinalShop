@@ -42,7 +42,9 @@
 		</div>
 
 		<!-- Display list products -->
-		<%= render partial: "shared/products", locals:{products: @products} %>
+		<div class="product-list">
+			<%= render partial: "shared/products", locals:{products: @products} %>
+		</div>
 		<!-- end  -->
 
 	</div>

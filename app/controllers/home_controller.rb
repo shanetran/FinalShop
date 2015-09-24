@@ -1,9 +1,17 @@
 class HomeController < ApplicationController
  
   def index
-    @title_page = "Shopping Online"
-    @products = Product.order(:category_id).page(params[:page])
-    @categories = Category.all
+    if not mobile_device?
+      @categories = Category.order(:name)
+    else
+      @title_page = "Shopping Online"
+      @products = Product.order(:category_id).page(params[:page])
+      @categories = Category.all
+      respond_to do |format|
+        format.js
+        format.html
+      end
+    end
   end
 
   def active
