@@ -2,11 +2,9 @@
 <html>
 	<head>
 		<title><%= @title_page.present? ? @title_page : "Shopping Online Mobile" %></title>
-		<%= javascript_include_tag 'application' %>
 		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
-		<%= csrf_meta_tags %>
 	</head>
 	<body>
 		<div data-role="page" data-theme="a">

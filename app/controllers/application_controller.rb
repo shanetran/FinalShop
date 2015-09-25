@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
 
   def mobile_device?
     is_mobile_device? or is_tablet_device?
-    true
+    #true
   end
   helper_method :mobile_device?
 
