@@ -1,0 +1,44 @@
+<div style="margin: 0 auto; width: 50%;">
+	<h2>Edit Information</h2>
+	<%= form_for(:users, url: user_path(current_user.id), method: :patch) do |f| %>
+	<div class="form-group col-lg-12">
+		<%= f.label :email %>
+		
+		<%= f.email_field :email, autofocus: true, value: current_user.email, class: "form-control", readonly: true %>
+	</div>
+	<div class="form-group col-lg-6">
+		<%= f.label "Full Name" %>
+		
+		<%= f.text_field :fullname, autofocus: true, value: current_user.fullname, class: "form-control" %>
+	</div>
+	<div class="form-group col-lg-6">
+		<%= f.label "Day of Birth" %>
+		<input type="date" data-clear-btn="true" name="user[birthdate]">
+	</div>
+	<div class="form-group col-lg-12">
+		<%= f.label :address %>
+		
+		<%= f.text_area :address, autofocus: true, value: current_user.address, class: "form-control" %>
+	</div>
+	<div class="form-group col-lg-6">
+		<%= f.label :Gender %>
+		
+		<%= f.select :gender, options_for_select([["Male",true],["Female",false]], selected: current_user.gender),{selected: current_user.gender}, {class: "form-control"} %>
+	</div>
+	<div class="form-group col-lg-6">
+		<%= f.label :phone %>
+		
+		<%= f.text_field :phone, autofocus: true, value: current_user.phone, class: "form-control" %>
+	</div>
+	<div class="form-group col-lg-6">
+		<%= f.label :Role %>
+		
+		<%= f.select :role, options_for_select([["Seller","seller"],["User","user"]], selected: current_user.role),{selected: current_user.role}, {class: "form-control"} %>
+	</div>
+	<div class="form-group col-lg-12">
+		<%= f.submit "Save", class: "btn btn-primary" %>
+
+		<%= link_to "Back", root_path, class: "btn btn-primary" %>
+	</div>
+	<% end %>
+</div>

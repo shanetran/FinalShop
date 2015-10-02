@@ -1,0 +1,56 @@
+<div class="row">
+	<div class="col-md-3">
+		<p class="lead">
+			Categories
+		</p>
+		<div class="list-group">
+			<% @categories.each do |category| %>
+			<%= link_to category.name, category_path(category), class: "list-group-item" %>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="col-md-9">
+		<div class="row carousel-holder">
+			<div class="col-md-12">
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+					<ol class="carousel-indicators">
+						<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+					</ol>
+					<div class="carousel-inner">
+						<div class="item active">
+							<%= image_tag("bg1.jpg", size: "800x300", class: "slide-image") %>
+						</div>
+						<div class="item">
+							<%= image_tag("bg2.jpg", size: "800x300", class: "slide-image") %>
+						</div>
+						<div class="item">
+							<%= image_tag("bg3.jpg", size: "800x300", class: "slide-image") %>
+						</div>
+						<div class="item">
+							<%= image_tag("bg4.jpg", size: "800x300", class: "slide-image") %>
+						</div>
+					</div>
+					<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
+					<a class="right carousel-control" href="#carousel-example-generic" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a>
+				</div>
+			</div>
+		</div>
+		<% if @products.size > 0 %>
+		<!-- Display list products -->
+		<div class="product-list">
+			<%= render partial: "shared/products", locals:{products: @products} %>
+		</div>
+		<!-- end  -->
+
+		<% else %>
+		<p>
+			Data Not found
+		</p>
+		<% end %>
+	</div>
+</div>
+

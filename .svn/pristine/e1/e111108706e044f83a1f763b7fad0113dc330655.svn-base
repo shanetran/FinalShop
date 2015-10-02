@@ -1,0 +1,2 @@
+$('.product-list').html("<%= escape_javascript(render partial: 'shared/products', locals: {products: @products}) %>");
+$('.paginator').html("<%= escape_javascript(paginate(@products, :remote => true)) %>");

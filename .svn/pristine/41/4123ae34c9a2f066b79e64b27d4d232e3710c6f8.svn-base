@@ -1,0 +1,60 @@
+<div class="row">
+	<div class="col-md-12">
+		<h4><%= fa_icon("user 2x")%> Manage Users</h4>
+		<%= link_to "Add New User", "#", remote: true, "data-toggle" => "modal", "data-target" => "#AdminNewUser", class: "btn btn-primary" %>
+		<div class="table-responsive">
+			<table id="mytable" class="table table-bordred table-striped">
+				<thead>
+					<th>No</th>
+					<th>Full Name</th>
+					<th>Email</th>
+					<th>Gender</th>
+					<th>Birth Day</th>
+					<th>Address</th>
+					<th>Phone</th>
+					<th>Admin</th>
+					<th>Role</th>
+					<th>Status</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</thead>
+				<tbody>
+					<% @users.each_with_index do |user, index| %>
+					<tr>
+						<td><%= (index + 1) %></td>
+						<td><%= user.fullname %></td>
+						<td><%= user.email %></td>
+						<td><%= (user.gender == true) ? 'Male' : 'Female' %></td>
+						<td><%= user.birthdate.strftime("%F") if user.birthdate  %></td>
+						<td><%= user.address %></td>
+						<td><%= user.phone %></td>
+						<td><%= (user.admin == true) ? fa_icon("users") : fa_icon("user") %></td>
+						<td><%= user.role %></td>
+						<td><%= (user.status == "Active") ? fa_icon("unlock") : fa_icon("lock") %></td>
+						<td>
+						<p data-placement="top" data-toggle="tooltip" title="Edit">
+							<%= link_to "#", remote: true, class: "btn btn-primary btn-xs", "data-title" => "Edit", "data-toggle" => "modal", "data-target" => "#edit_user_#{user.id}", :target => "_blank" do %>
+							<%= fa_icon("pencil")%>
+							<% end %>
+						</p></td>
+						<td>
+						<p data-placement="top" data-toggle="tooltip" title="Delete">
+							<%= link_to admin_user_path(user), data: {confirm: 'Are you sure?'}, method: :delete, class: "btn btn-danger btn-xs" do %>
+							<%= fa_icon("trash-o")%>
+							<% end %>
+						</p></td>
+
+						<%= render partial: 'edit', locals:{user: user} %>
+
+					</tr>
+					<% end %>
+				</tbody>
+
+			</table>
+
+			<div class="clearfix"></div>
+		</div>
+
+	</div>
+</div>
+<%= render 'new' %>
