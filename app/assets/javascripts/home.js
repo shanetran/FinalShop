@@ -121,7 +121,7 @@ $(function() {
 	//end
 
 	//add ajax cart
-	$(".add-ajax-cart").click(function() {
+	$("body").on("click",".add-ajax-cart", function() {
 		var id = $(this).attr("data-id");
 		$.ajax({
 			url : "/carts/add_cart_ajax",
