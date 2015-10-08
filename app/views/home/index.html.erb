@@ -39,7 +39,7 @@
 				</div>
 			</div>
 		</div>
-		<% if @products.size > 0 %>
+		<% if not @products.nil? %>
 		<!-- Display list products -->
 		<div class="product-list">
 			<%= render partial: "shared/products", locals:{products: @products} %>
