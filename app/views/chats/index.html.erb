@@ -1,0 +1,25 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3><i class="fa fa-comments-o fa-2x"></i> Chat Forums</h3>
+			<%= form_for(:chats, url: chats_path, remote: true) do |f| %>
+			<div class="form-group">
+				<label for="usr">Message:</label>
+				<textarea class="form-control" name="chats[message]"></textarea>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">
+					Add Chat
+				</button>
+			</div>
+			<% end %>
+			<% if @chats.size > 0 %>
+			<div class="chat-list">
+				<%= render partial: "shared/chats", locals:{chats: @chats} %>
+			</div>
+			<% else %>
+			<h4>No Chatting</h4>
+			<% end %>
+		</div>
+	</div>
+</div>

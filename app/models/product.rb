@@ -14,7 +14,7 @@ class Product < ActiveRecord::Base
     key = key.split
     str = key.collect{|c| "%#{c}%"}
     product_arel = Product.arel_table
-    where(product_arel[:slug].matches_any(str))
+    where(product_arel[:name].matches_any(str))
   end
 
    def to_param

@@ -1,0 +1,25 @@
+<% chats.each do |chat| %>
+<blockquote>
+	<p>
+		<i class="fa fa-comments"></i> <%= chat.message %>
+	</p>
+	<small><%= chat.user.fullname %> <cite>at <%= chat.created_at.strftime("%r - %F") %></cite> 
+		<% if user_signed_in? %>
+			<% if current_user.id == chat.user_id%>
+				<%= render partial: "edit", locals: {chat: chat}%>
+				<%= link_to "", class: "btn btn-info btn-xs btn-info", "data-toggle" => "modal", "data-target" => "#user_chat_#{chat.id}" do %>
+					<%= fa_icon("edit")%>
+				<% end %>
+				
+				<%= link_to chat_path(chat), method: :delete, data: {confirm: "Are you sure ?"}, :remote => true, class: "btn btn-info btn-xs btn-danger" do %>
+					<%= fa_icon("trash")%>
+				<% end %>
+			<% end %>
+		<% end %>
+	 </small>
+
+</blockquote>
+<% end %>
+<div class="paginator-chat">
+	<%= paginate chats, :remote => true %>
+</div>

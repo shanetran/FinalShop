@@ -1,0 +1,28 @@
+<div class="modal fade" id="user_chat_<%= chat.id %>" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<%= fa_icon("times-circle")%>
+				</button>
+				<h4 class="modal-title custom_align" id="Heading">Edit Chat</h4>
+			</div>
+			<%= form_tag(chat_path(chat), method: :patch, :remote => true) do %>
+			<div class="modal-body">
+				<div class="form-group col-lg-12">
+					<label for="">Message:</label>
+					<%= text_area_tag :message, chat.message, class: 'form-control' %>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="modal-footer ">
+				<button type="submit" data-disable-with="<i class='fa fa-spinner fa-spin'></i> Processing..." class="btn btn-warning btn-lg" style="width: 100%;">
+					<%= fa_icon("check-circle") %> Update
+				</button>
+			</div>
+			<% end %>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>

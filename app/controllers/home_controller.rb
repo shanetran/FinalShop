@@ -44,4 +44,9 @@ class HomeController < ApplicationController
     @products = products.page(params[:page])
     
   end
+  
+  def typeahead
+    product = Product.pluck(:name)
+    render json: product
+  end
 end

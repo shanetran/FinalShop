@@ -1,0 +1,6 @@
+$('.chat-list').html("<%= escape_javascript(render partial: 'shared/chats', locals: {chats: @chats}) %>");
+$('.paginator-chat').html("<%= escape_javascript(paginate(@chats, :remote => true)) %>");
+$('.chat-list').show();
+$('.modal-backdrop').remove(); 
+$('body').removeClass('modal-open');
+

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'chats/index'
+
   root to: 'home#index'
   devise_for :users, :controllers => {:registrations => "users/registrations",
                                       :sessions => "users/sessions",
@@ -20,6 +22,7 @@ Rails.application.routes.draw do
   resources :distributors, only: [:show]
   resources :contacts
   resources :categories
+  resources :chats   
   resources :checkouts do
     member do
       get '/delivery', to: 'checkouts#delivery'
@@ -44,6 +47,7 @@ Rails.application.routes.draw do
   post 'add_product', to: 'wishlists#add_product'
   post 'like', to: 'likes#like'
   post 'unlike', to: 'likes#unlike'
+  post 'typeahead', to: 'home#typeahead'
   # end
   #   -------------------------------------
 
